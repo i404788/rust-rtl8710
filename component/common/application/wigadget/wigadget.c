@@ -48,7 +48,8 @@ void decrypt_data_aes(unsigned char *enc_data, unsigned char *dec_data, int data
 
 
 
-static unsigned int arc4random(void)
+//  Lup Yuen: Rename arc4random to avoid collision.
+static unsigned int arc4random0(void)
 {
 	unsigned int res = xTaskGetTickCount();
 	static unsigned int seed = 0xDEADB00B;
@@ -469,8 +470,9 @@ static void pair_device_task(void)
 			printf("\r\n\r\n===>Start the first handshake\r\n\r\n");
 			memset(tx_buffer, 0, sizeof(tx_buffer));
 			memset(rx_buffer, 0, sizeof(rx_buffer));
+			//  Lup Yuen: Rename arc4random to avoid collision.
 			for(j = 0; j < 32; j ++) 
-				mysecret[j] = (uint8_t) arc4random();  
+				mysecret[j] = (uint8_t) arc4random0();  
 			mysecret[j] = '\0';
 			curve25519_donna(mypublic, mysecret, basepoint);
 			for (j = 0; j < 32; j++){
