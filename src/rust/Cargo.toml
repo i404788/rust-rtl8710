@@ -4,4 +4,4 @@ version = "0.1.0"
 authors = ["polyfractal <zach@zacharytong.com>"]
 
 [dependencies]
-freertos_rs = "0.1"
+freertos_rs = "0.2"
