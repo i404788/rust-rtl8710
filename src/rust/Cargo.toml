@@ -4,7 +4,5 @@ version = "0.1.0"
 authors = ["polyfractal <zach@zacharytong.com>"]
 
 [dependencies]
-# Previously:
-# freertos_rs = "0.2"
 # New version that fixes compilation:
 freertos_rs = { git = "https://github.com/hashmismatch/freertos.rs", rev = "7bc71903e96c0bc395aa7473b95d5fb0e5499175" }
