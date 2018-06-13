@@ -1,5 +1,6 @@
 [target.thumbv7m-none-eabi.dependencies.alloc]
 alloc = {}
 
-[target.thumbv7m-none-eabi.dependencies.collections]
-collections = {}
+# Lup Yuen: Collections module no longer exists.
+# [target.thumbv7m-none-eabi.dependencies.collections]
+# collections = {}
