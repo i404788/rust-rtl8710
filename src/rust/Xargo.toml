@@ -1,6 +1,17 @@
 [target.thumbv7m-none-eabi.dependencies.alloc]
 alloc = {}
 
+# Lup Yuen: Added mem, ptr, slice
+
+[target.thumbv7m-none-eabi.dependencies.mem]
+mem = {}
+
+[target.thumbv7m-none-eabi.dependencies.ptr]
+ptr = {}
+
+[target.thumbv7m-none-eabi.dependencies.slice]
+slice = {}
+
 # Lup Yuen: Collections module no longer exists.
 # [target.thumbv7m-none-eabi.dependencies.collections]
 # collections = {}
