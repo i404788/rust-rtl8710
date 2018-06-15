@@ -384,7 +384,8 @@ SRC_C_LIST = $(notdir $(SRC_C)) $(notdir $(DRAM_C))
 OBJ_LIST = $(addprefix $(OBJ_DIR)/,$(patsubst %.c,%.o,$(SRC_C_LIST)))
 
 # Rust lib
-OBJ_LIST += $(TARGET)/Debug/rust_obj/librustl8710.o
+# Lup Yuen: Added libcore
+OBJ_LIST += $(TARGET)/Debug/rust_obj/librustl8710.o $(TARGET)/Debug/rust_obj/libcore.o
 
 DEPENDENCY_LIST = $(addprefix $(OBJ_DIR)/,$(patsubst %.c,%.d,$(SRC_C_LIST)))
 
