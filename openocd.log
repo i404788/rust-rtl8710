@@ -35,3 +35,5 @@ read offset 786432
 dumped 262144 bytes in 14.646487s (17.479 KiB/s)
 read 262144 bytes
 shutdown command invoked
+
+openocd -f interface/jlink.cfg -f rtl8710.ocd -c "init" -c "reset halt" -c "rtl8710_flash_auto_erase 1" -c "rtl8710_flash_auto_verify 1" -c "rtl8710_flash_write application/Debug/bin/ram_all.bin 0" -c "shutdown"
