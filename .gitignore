@@ -3,3 +3,5 @@ Cargo.lock
 ./application/
 *.o
 src/c/inc/build_info.h
+application/Debug/bin/
+application/Debug/obj/
