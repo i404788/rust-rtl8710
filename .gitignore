@@ -5,4 +5,3 @@ Cargo.lock
 src/c/inc/build_info.h
 application/Debug/bin/
 application/Debug/obj/
-dump.bin

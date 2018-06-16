@@ -1,3 +1,5 @@
+sudo apt install openocd
+
 openocd -f interface/jlink.cfg -f rtl8710.ocd \
         -c "init" \
         -c "reset halt" \
