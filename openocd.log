@@ -1,4 +1,10 @@
-user@padi:~/rtl8710_openocd$ openocd -f interface/jlink.cfg -f rtl8710.ocd -c "init" -c "reset halt"     -c "rtl8710_flash_read_id" -c "rtl8710_flash_read dump.bin 0 1048576" -c "shutdown"
+openocd -f interface/jlink.cfg -f rtl8710.ocd \
+        -c "init" \
+        -c "reset halt" \
+        -c "rtl8710_flash_read_id" \
+        -c "rtl8710_flash_read dump.bin 0 1048576" \
+        -c "shutdown"
+
 Open On-Chip Debugger 0.10.0
 Licensed under GNU GPL v2
 For bug reports, read
@@ -36,4 +42,128 @@ dumped 262144 bytes in 14.646487s (17.479 KiB/s)
 read 262144 bytes
 shutdown command invoked
 
-openocd -f interface/jlink.cfg -f rtl8710.ocd -c "init" -c "reset halt" -c "rtl8710_flash_auto_erase 1" -c "rtl8710_flash_auto_verify 1" -c "rtl8710_flash_write application/Debug/bin/ram_all.bin 0" -c "shutdown"
+openocd -f interface/jlink.cfg -f rtl8710.ocd \
+        -c "init" \
+        -c "reset halt" \
+        -c "rtl8710_flash_auto_erase 1" \
+        -c "rtl8710_flash_auto_verify 1" \
+        -c "rtl8710_flash_write application/Debug/bin/ram_all.bin 0" \
+        -c "shutdown"
+
+Open On-Chip Debugger 0.10.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+adapter speed: 500 kHz
+adapter_nsrst_delay: 100
+cortex_m reset_config sysresetreq
+rtl8710_reboot
+Info : No device selected, using first device.
+Info : J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Info : Hardware version: 7.00
+Info : VTarget = 3.300 V
+Info : clock speed 500 kHz
+Info : SWD DPIDR 0x2ba01477
+Info : rtl8710.cpu: hardware has 6 breakpoints, 4 watchpoints
+target halted due to debug-request, current mode: Thread
+xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+auto erase on
+auto verify on
+initializing RTL8710 flasher
+faultmask (/1): 0x01
+sp (/32): 0x20000000
+pc (/32): 0x10001000
+RTL8710 flasher initialized
+write offset 0
+262144 bytes written at address 0x10008020
+downloaded 262144 bytes in 14.572890s (17.567 KiB/s)
+erase sector 0
+erase sector 1
+erase sector 2
+erase sector 3
+erase sector 4
+erase sector 5
+erase sector 6
+erase sector 7
+erase sector 8
+erase sector 9
+erase sector 10
+erase sector 11
+erase sector 12
+erase sector 13
+erase sector 14
+erase sector 15
+erase sector 16
+erase sector 17
+erase sector 18
+erase sector 19
+erase sector 20
+erase sector 21
+erase sector 22
+erase sector 23
+erase sector 24
+erase sector 25
+erase sector 26
+erase sector 27
+erase sector 28
+erase sector 29
+erase sector 30
+erase sector 31
+erase sector 32
+erase sector 33
+erase sector 34
+erase sector 35
+erase sector 36
+erase sector 37
+erase sector 38
+erase sector 39
+erase sector 40
+erase sector 41
+erase sector 42
+erase sector 43
+erase sector 44
+erase sector 45
+erase sector 46
+erase sector 47
+erase sector 48
+erase sector 49
+erase sector 50
+erase sector 51
+erase sector 52
+erase sector 53
+erase sector 54
+erase sector 55
+erase sector 56
+erase sector 57
+erase sector 58
+erase sector 59
+erase sector 60
+erase sector 61
+erase sector 62
+erase sector 63
+wrote 262144 bytes
+verify offset 0
+write offset 262144
+69744 bytes written at address 0x10008020
+downloaded 69744 bytes in 3.876298s (17.571 KiB/s)
+erase sector 64
+erase sector 65
+erase sector 66
+erase sector 67
+erase sector 68
+erase sector 69
+erase sector 70
+erase sector 71
+erase sector 72
+erase sector 73
+erase sector 74
+erase sector 75
+erase sector 76
+erase sector 77
+erase sector 78
+erase sector 79
+erase sector 80
+erase sector 81
+wrote 69744 bytes
+verify offset 262144
+shutdown command invoked
