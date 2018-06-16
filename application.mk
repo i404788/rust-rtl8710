@@ -13,7 +13,8 @@ CC = $(CROSS_COMPILE)gcc
 AS = $(CROSS_COMPILE)as
 NM = $(CROSS_COMPILE)nm
 LD = $(CROSS_COMPILE)gcc
-GDB = $(CROSS_COMPILE)gdb
+# Lup Yuen: Updated arm-none-eabi-gdb to gdb-multiarch
+GDB = gdb-multiarch
 OBJCOPY = $(CROSS_COMPILE)objcopy
 OBJDUMP = $(CROSS_COMPILE)objdump
 
