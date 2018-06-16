@@ -1,0 +1,40 @@
+user@padi:~/rtl8710_openocd$ /opt/SEGGER/JLink/JLinkGDBServer -device cortex-m3 -if swd
+SEGGER J-Link GDB Server V6.32d Command Line Version
+
+JLinkARM.dll V6.32d (DLL compiled May 28 2018 16:58:57)
+
+Command line: -device cortex-m3 -if swd
+-----GDB Server start settings-----
+GDBInit file:                  none
+GDB Server Listening port:     2331
+SWO raw output listening port: 2332
+Terminal I/O port:             2333
+Accept remote connection:      yes
+Generate logfile:              off
+Verify download:               off
+Init regs on start:            off
+Silent mode:                   off
+Single run mode:               off
+Target connection timeout:     0 ms
+------J-Link related settings------
+J-Link Host interface:         USB
+J-Link script:                 none
+J-Link settings file:          none
+------Target related settings------
+Target device:                 cortex-m3
+Target interface:              SWD
+Target interface speed:        4000kHz
+Target endian:                 little
+
+Connecting to J-Link...
+J-Link is connected.
+Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Hardware: V7.00
+S/N: 20090928
+Feature(s): RDI,FlashDL,FlashBP,JFlash,GDBFull
+Checking target voltage...
+Target voltage: 3.30 V
+Listening on TCP/IP port 2331
+Connecting to target...Connected to target
+Waiting for GDB connection...^CRestoring target state and closing J-Link connection...
+Shutting down...
