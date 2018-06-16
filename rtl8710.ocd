@@ -1,0 +1,348 @@
+#
+# OpenOCD script for RTL8710
+# Copyright (C) 2016 Rebane, rebane@alkohol.ee
+#
+
+source [find target/swj-dp.tcl]
+
+if { [info exists CHIPNAME] } {
+	set _CHIPNAME $CHIPNAME
+} else {
+	set _CHIPNAME rtl8710
+}
+
+if { [info exists ENDIAN] } {
+	set _ENDIAN $ENDIAN
+} else {
+	set _ENDIAN little
+}
+
+if { [info exists WORKAREASIZE] } {
+	set _WORKAREASIZE $WORKAREASIZE
+} else {
+	set _WORKAREASIZE 0x800
+}
+
+if { [info exists CPUTAPID] } {
+	set _CPUTAPID $CPUTAPID
+} else {
+	set _CPUTAPID 0x2ba01477
+}
+
+swj_newdap $_CHIPNAME cpu -irlen 4 -expected-id $_CPUTAPID
+
+set _TARGETNAME $_CHIPNAME.cpu
+target create $_TARGETNAME cortex_m -endian $_ENDIAN -chain-position $_TARGETNAME
+
+$_TARGETNAME configure -work-area-phys 0x10001000 -work-area-size $_WORKAREASIZE -work-area-backup 0
+
+adapter_khz 500
+adapter_nsrst_delay 100
+
+if {![using_hla]} {
+	cortex_m reset_config sysresetreq
+}
+
+set rtl8710_flasher_firmware_ptr 0x10001000
+set rtl8710_flasher_buffer 0x10008000
+set rtl8710_flasher_buffer_size 262144
+set rtl8710_flasher_sector_size 4096
+
+array set rtl8710_flasher_code {
+	0 0x4FF0E92D 1 0xB671B087 2 0x4C5A4B59 3 0x4E5A6B1A 4 0x7240F042 5 0x69DA631A
+	6 0xF4424D58 7 0x61DA7280 8 0xF8C322FF 9 0xF8C32120 10 0x4B552124 11 0x47A04798
+	12 0xF8DF47B0 13 0x60288174 14 0x47A04F52 15 0x22009600 16 0x601A4B51 17 0x2A00681A
+	18 0x4B50D0FC 19 0xB932681A 20 0x47A0602A 21 0x47989B00 22 0x47A06028 23 0x681AE7EF
+	24 0xD10B2A01 25 0x4E4A47A0 26 0x47B02006 27 0x47984B49 28 0x47B020C7 29 0x200447A0
+	30 0xE7EE47B0 31 0x2A02681A 32 0x47A0D109 33 0x20064E42 34 0x4B4247B0 35 0x68384798
+	36 0x47984B41 37 0x681AE7EE 38 0xD1162A03 39 0x47A02600 40 0x9108F8DF 41 0xA000F8D7
+	42 0xB0F4F8DF 43 0xF8D94B3B 44 0xEB062000 45 0x4296000A 46 0xEB06D2CF 47 0x2210010B
+	48 0x36109301 49 0x9B014798 50 0x681AE7F1 51 0xD11C2A04 52 0xF8DF2600 53 0xF8DFA0D8
+	54 0xF8DA90B8 55 0x429E3000 56 0x47A0D2AD 57 0x47C82006 58 0x47984B2A 59 0x492C6838
+	60 0x7280F44F 61 0x4B2B4431 62 0x47984430 63 0x200447A0 64 0xF50647C8 65 0x47A07680
+	66 0x681BE7E7 67 0xD12A2B05 68 0x260047A0 69 0x9094F8DF 70 0xA080F8DF 71 0x3000F8D9
+	72 0xD28C429E 73 0x22106838 74 0x4430A902 75 0xF8D947D0 76 0x22003000 77 0x2B101B9B
+	78 0x2310BF28 79 0x44314918 80 0xD102429A 81 0x361047A0 82 0xF10DE7E8 83 0x5C880E08
+	84 0xE002F81E 85 0xD1014586 86 0xE7F13201 87 0xF8C82301 88 0x602E3000 89 0x2301E76B
+	90 0x3000F8C8 91 0xBF00E767 92 0x40000200 93 0x100013A1 94 0x10001271 95 0x1000800C
+	96 0x100011C9 97 0x10008010 98 0x10008000 99 0x10008004 100 0x100012E1 101 0x100013B1
+	102 0x10001301 103 0x10001211 104 0x10008020 105 0x10001339 106 0x10008008 107 0x10008014
+	108 0x6A534A04 109 0x030BF3C3 110 0xD0FA2B00 111 0x0060F892 112 0xBF004770 113 0x40006000
+	114 0x21014B10 115 0xF4426B1A 116 0x631A7240 117 0xF042691A 118 0x611A0210 119 0x20C0F8D3
+	120 0x0206F022 121 0x20C0F8C3 122 0x20C0F8D3 123 0x0201F042 124 0x20C0F8C3 125 0xF5032200
+	126 0x609A43BC 127 0x611962DA 128 0x61592102 129 0x61DA619A 130 0x477064DA 131 0x40000200
+	132 0x4614B570 133 0x2A10B332 134 0x7240F44F 135 0xBF284B12 136 0x601A2410 137 0x605C2203
+	138 0x2060F883 139 0x4207F3C0 140 0x2060F883 141 0x2207F3C0 142 0x2060F883 143 0x460D2201
+	144 0x4E0AB2C0 145 0x0060F883 146 0x47B0609A 147 0x0B01F805 148 0xB29B1A6B 149 0xD8F8429C
+	150 0x6A934A03 151 0x0301F013 152 0x6093D1FB 153 0xBD704620 154 0x40006000 155 0x100011B1
+	156 0x7340F44F 157 0xB570490C 158 0x2303600B 159 0x2301604B 160 0x239F608B 161 0xF8814C09
+	162 0x47A03060 163 0x47A04605 164 0x47A04606 165 0xEA400400 166 0x43282006 167 0xF0136A8B
+	168 0xD1FB0301 169 0xBD70608B 170 0x40006000 171 0x100011B1 172 0xF44FB508 173 0x49087340
+	174 0x2301600B 175 0x608B604B 176 0xF8812305 177 0x4B053060 178 0x6A8B4798 179 0x0301F013
+	180 0x608BD1FB 181 0xBF00BD08 182 0x40006000 183 0x100011B1 184 0x7280F44F 185 0x601A4B05
+	186 0x609A2201 187 0x0060F883 188 0xF0126A9A 189 0xD1FB0201 190 0x4770609A 191 0x40006000
+	192 0x7280F44F 193 0x601A4B0B 194 0x609A2201 195 0xF8832220 196 0xF3C02060 197 0xF8834207
+	198 0xF3C02060 199 0xB2C02207 200 0x2060F883 201 0x0060F883 202 0xF0126A9A 203 0xD1FB0201
+	204 0x4770609A 205 0x40006000 206 0xB362B530 207 0x7480F44F 208 0xF5B24B16 209 0x601C7F80
+	210 0x0401F04F 211 0xF04F609C 212 0xF8830402 213 0xF3C04060 214 0xF8834407 215 0xF3C04060
+	216 0xB2C02407 217 0x4060F883 218 0xF44FBF28 219 0xF8837280 220 0x460D0060 221 0xF8154618
+	222 0xF8834B01 223 0x1A6C4060 224 0x42A2B2A4 225 0x6A83D8F7 226 0xD5FC075B 227 0xF0136A83
+	228 0xD1FB0301 229 0x46106083 230 0xBF00BD30 231 0x40006000 232 0x4C02B510 233 0x07C347A0
+	234 0xBD10D4FC 235 0x100012B1 236 0x4C02B510 237 0x078347A0 238 0xBD10D5FC 239 0x100012B1
+}
+
+set rtl8710_flasher_command_read_id      0
+set rtl8710_flasher_command_mass_erase   1
+set rtl8710_flasher_command_sector_erase 2
+set rtl8710_flasher_command_read         3
+set rtl8710_flasher_command_write        4
+set rtl8710_flasher_command_verify       5
+
+set rtl8710_flasher_mac_address_offset   0xA088
+
+set rtl8710_flasher_ready                0
+set rtl8710_flasher_capacity             0
+set rtl8710_flasher_auto_erase           0
+set rtl8710_flasher_auto_verify          0
+set rtl8710_flasher_auto_erase_sector    0xFFFFFFFF
+
+proc rtl8710_flasher_init {} {
+	global rtl8710_flasher_firmware_ptr
+	global rtl8710_flasher_buffer
+	global rtl8710_flasher_capacity
+	global rtl8710_flasher_ready
+	global rtl8710_flasher_code
+
+	if {[expr {$rtl8710_flasher_ready == 0}]} {
+		echo "initializing RTL8710 flasher"
+		halt
+		mww [expr {$rtl8710_flasher_buffer + 0x08}] 0x00000000
+		mww [expr {$rtl8710_flasher_buffer + 0x00}] 0x00000001
+		array2mem rtl8710_flasher_code 32 $rtl8710_flasher_firmware_ptr [array size rtl8710_flasher_code]
+		reg faultmask 0x01
+		reg sp 0x20000000
+		reg pc $rtl8710_flasher_firmware_ptr
+		resume
+		rtl8710_flasher_wait
+		set id [rtl8710_flasher_mrw [expr {$rtl8710_flasher_buffer + 0x0C}]]
+		set rtl8710_flasher_capacity [expr {2 ** [expr {($id >> 16) & 0xFF}]}]
+		set rtl8710_flasher_ready 1
+		echo "RTL8710 flasher initialized"
+	}
+	return ""
+}
+
+proc rtl8710_flasher_mrw {reg} {
+	set value ""
+	mem2array value 32 $reg 1
+	return $value(0)
+}
+
+proc rtl8710_flasher_wait {} {
+	global rtl8710_flasher_buffer
+	while {[rtl8710_flasher_mrw [expr {$rtl8710_flasher_buffer + 0x00}]]} { }
+}
+
+proc rtl8710_flasher_load_block {local_filename offset len} {
+	global rtl8710_flasher_buffer
+	load_image $local_filename [expr {$rtl8710_flasher_buffer + 0x20 - $offset}] bin [expr {$rtl8710_flasher_buffer + 0x20}] $len
+}
+
+proc rtl8710_flasher_read_block {offset len} {
+	global rtl8710_flasher_buffer
+	global rtl8710_flasher_command_read
+	mww [expr {$rtl8710_flasher_buffer + 0x04}] $rtl8710_flasher_command_read
+	mww [expr {$rtl8710_flasher_buffer + 0x08}] 0x00000000
+	mww [expr {$rtl8710_flasher_buffer + 0x10}] $offset
+	mww [expr {$rtl8710_flasher_buffer + 0x14}] $len
+	mww [expr {$rtl8710_flasher_buffer + 0x00}] 0x00000001
+	rtl8710_flasher_wait
+	set status [rtl8710_flasher_mrw [expr {$rtl8710_flasher_buffer + 0x08}]]
+	if {[expr {$status > 0}]} {
+		error "read error, offset $offset"
+	}
+}
+
+proc rtl8710_flasher_write_block {offset len} {
+	global rtl8710_flasher_buffer
+	global rtl8710_flasher_command_write
+	mww [expr {$rtl8710_flasher_buffer + 0x04}] $rtl8710_flasher_command_write
+	mww [expr {$rtl8710_flasher_buffer + 0x08}] 0x00000000
+	mww [expr {$rtl8710_flasher_buffer + 0x10}] $offset
+	mww [expr {$rtl8710_flasher_buffer + 0x14}] $len
+	mww [expr {$rtl8710_flasher_buffer + 0x00}] 0x00000001
+	rtl8710_flasher_wait
+	set status [rtl8710_flasher_mrw [expr {$rtl8710_flasher_buffer + 0x08}]]
+	if {[expr {$status > 0}]} {
+		error "write error, offset $offset"
+	}
+}
+
+proc rtl8710_flasher_verify_block {offset len} {
+	global rtl8710_flasher_buffer
+	global rtl8710_flasher_command_verify
+	mww [expr {$rtl8710_flasher_buffer + 0x04}] $rtl8710_flasher_command_verify
+	mww [expr {$rtl8710_flasher_buffer + 0x08}] 0x00000000
+	mww [expr {$rtl8710_flasher_buffer + 0x10}] $offset
+	mww [expr {$rtl8710_flasher_buffer + 0x14}] $len
+	mww [expr {$rtl8710_flasher_buffer + 0x00}] 0x00000001
+	rtl8710_flasher_wait
+	set status [rtl8710_flasher_mrw [expr {$rtl8710_flasher_buffer + 0x08}]]
+	if {[expr {$status > 0}]} {
+		set status [rtl8710_flasher_mrw [expr {$rtl8710_flasher_buffer + 0x0C}]]
+		set status [expr {$status + $offset}]
+		error "verify error, offset $status"
+	}
+}
+
+proc rtl8710_flash_read_id {} {
+	global rtl8710_flasher_buffer
+	global rtl8710_flasher_capacity
+	global rtl8710_flasher_command_read_id
+	rtl8710_flasher_init
+	mww [expr {$rtl8710_flasher_buffer + 0x04}] $rtl8710_flasher_command_read_id
+	mww [expr {$rtl8710_flasher_buffer + 0x08}] 0x00000000
+	mww [expr {$rtl8710_flasher_buffer + 0x00}] 0x00000001
+	rtl8710_flasher_wait
+	set id [rtl8710_flasher_mrw [expr {$rtl8710_flasher_buffer + 0x0C}]]
+	set manufacturer_id [format "0x%02X" [expr {$id & 0xFF}]]
+	set memory_type [format "0x%02X" [expr {($id >> 8) & 0xFF}]]
+	set memory_capacity [expr {2 ** [expr {($id >> 16) & 0xFF}]}]
+	echo "manufacturer ID: $manufacturer_id, memory type: $memory_type, memory capacity: $memory_capacity bytes"
+}
+
+proc rtl8710_flash_mass_erase {} {
+	global rtl8710_flasher_buffer
+	global rtl8710_flasher_command_mass_erase
+	rtl8710_flasher_init
+	mww [expr {$rtl8710_flasher_buffer + 0x04}] $rtl8710_flasher_command_mass_erase
+	mww [expr {$rtl8710_flasher_buffer + 0x08}] 0x00000000
+	mww [expr {$rtl8710_flasher_buffer + 0x00}] 0x00000001
+	rtl8710_flasher_wait
+}
+
+proc rtl8710_flash_sector_erase {offset} {
+	global rtl8710_flasher_buffer
+	global rtl8710_flasher_command_sector_erase
+	rtl8710_flasher_init
+	mww [expr {$rtl8710_flasher_buffer + 0x04}] $rtl8710_flasher_command_sector_erase
+	mww [expr {$rtl8710_flasher_buffer + 0x08}] 0x00000000
+	mww [expr {$rtl8710_flasher_buffer + 0x10}] $offset
+	mww [expr {$rtl8710_flasher_buffer + 0x00}] 0x00000001
+	rtl8710_flasher_wait
+}
+
+proc rtl8710_flash_read {local_filename loc size} {
+	global rtl8710_flasher_buffer
+	global rtl8710_flasher_buffer_size
+	rtl8710_flasher_init
+	for {set offset 0} {$offset < $size} {set offset [expr {$offset + $rtl8710_flasher_buffer_size}]} {
+		set len [expr {$size - $offset}]
+		if {[expr {$len > $rtl8710_flasher_buffer_size}]} {
+			set len $rtl8710_flasher_buffer_size
+		}
+		set flash_offset [expr {$loc + $offset}]
+		echo "read offset $flash_offset"
+		rtl8710_flasher_read_block $flash_offset $len
+		dump_image /tmp/_rtl8710_flasher.bin [expr {$rtl8710_flasher_buffer + 0x20}] $len
+		exec dd conv=notrunc if=/tmp/_rtl8710_flasher.bin "of=$local_filename" bs=1 "seek=$offset"
+		echo "read $len bytes"
+	}
+}
+
+proc rtl8710_flash_write {local_filename loc} {
+	global rtl8710_flasher_buffer_size
+	global rtl8710_flasher_sector_size
+	global rtl8710_flasher_auto_erase
+	global rtl8710_flasher_auto_verify
+	global rtl8710_flasher_auto_erase_sector
+	rtl8710_flasher_init
+	set sector 0
+	set size [file size $local_filename]
+	for {set offset 0} {$offset < $size} {set offset [expr {$offset + $rtl8710_flasher_buffer_size}]} {
+		set len [expr {$size - $offset}]
+		if {[expr {$len > $rtl8710_flasher_buffer_size}]} {
+			set len $rtl8710_flasher_buffer_size
+		}
+		set flash_offset [expr {$loc + $offset}]
+		echo "write offset $flash_offset"
+		rtl8710_flasher_load_block $local_filename $offset $len
+		if {[expr {$rtl8710_flasher_auto_erase != 0}]} {
+			for {set i $flash_offset} {$i < [expr {$flash_offset + $len}]} {incr i} {
+				set sector [expr {$i / $rtl8710_flasher_sector_size}]
+				if {[expr {$rtl8710_flasher_auto_erase_sector != $sector}]} {
+					echo "erase sector $sector"
+					rtl8710_flash_sector_erase [expr {$sector * $rtl8710_flasher_sector_size}]
+					set rtl8710_flasher_auto_erase_sector $sector
+				}
+			}
+		}
+		rtl8710_flasher_write_block $flash_offset $len
+		echo "wrote $len bytes"
+		if {[expr {$rtl8710_flasher_auto_verify != 0}]} {
+			echo "verify offset $flash_offset"
+			rtl8710_flasher_verify_block $flash_offset $len
+		}
+	}
+}
+
+proc rtl8710_flash_verify {local_filename loc} {
+	global rtl8710_flasher_buffer_size
+	rtl8710_flasher_init
+	set size [file size $local_filename]
+	for {set offset 0} {$offset < $size} {set offset [expr {$offset + $rtl8710_flasher_buffer_size}]} {
+		set len [expr {$size - $offset}]
+		if {[expr {$len > $rtl8710_flasher_buffer_size}]} {
+			set len $rtl8710_flasher_buffer_size
+		}
+		set flash_offset [expr {$loc + $offset}]
+		echo "read offset $flash_offset"
+		rtl8710_flasher_load_block $local_filename $offset $len
+		echo "verify offset $flash_offset"
+		rtl8710_flasher_verify_block $flash_offset $len
+	}
+}
+
+proc rtl8710_flash_read_mac {} {
+	global rtl8710_flasher_mac_address_offset
+	global rtl8710_flasher_buffer
+	rtl8710_flasher_init
+	rtl8710_flasher_read_block $rtl8710_flasher_mac_address_offset 6
+	set mac ""
+	mem2array mac 8 [expr {$rtl8710_flasher_buffer + 0x20}] 6
+	set res "MAC address: "
+	append res [format %02X $mac(0)]
+	append res ":" [format %02X $mac(1)]
+	append res ":" [format %02X $mac(2)]
+	append res ":" [format %02X $mac(3)]
+	append res ":" [format %02X $mac(4)]
+	append res ":" [format %02X $mac(5)]
+	echo $res
+}
+
+proc rtl8710_flash_auto_erase {on} {
+	global rtl8710_flasher_auto_erase
+	if {[expr {$on != 0}]} {
+		set rtl8710_flasher_auto_erase 1
+		echo "auto erase on"
+	} else {
+		set rtl8710_flasher_auto_erase 0
+		echo "auto erase off"
+	}
+}
+
+proc rtl8710_flash_auto_verify {on} {
+	global rtl8710_flasher_auto_verify
+	if {[expr {$on != 0}]} {
+		set rtl8710_flasher_auto_verify 1
+		echo "auto verify on"
+	} else {
+		set rtl8710_flasher_auto_verify 0
+		echo "auto verify off"
+	}
+}
+
+proc rtl8710_reboot {} {
+	mww 0xE000ED0C 0x05FA0007
+}
+
