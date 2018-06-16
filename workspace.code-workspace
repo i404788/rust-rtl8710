@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "/home/user/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib"
+		},
+		{
+			"path": "/home/user/.xargo"
+		},
+		{
+			"path": "/home/user/.cargo/git/checkouts/freertos.rs-2613393845a650a6"
+		}
+	],
+	"settings": {}
+}
