@@ -38,3 +38,158 @@ Listening on TCP/IP port 2331
 Connecting to target...Connected to target
 Waiting for GDB connection...^CRestoring target state and closing J-Link connection...
 Shutting down...
+
+user@padi:~/rtl8710_openocd$ openocd -f interface/jlink.cfg -f rtl8710.ocd -c "init" -c "reset halt" -c "rtl8710_flash_read_id" -c "rtl8710_flash_read dump.bin 0 1048576" -c "shutdown"
+Open On-Chip Debugger 0.10.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
+adapter speed: 500 kHz
+adapter_nsrst_delay: 100
+cortex_m reset_config sysresetreq
+rtl8710_reboot
+Info : No device selected, using first device.
+Info : J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Info : Hardware version: 7.00
+Info : VTarget = 3.300 V
+Info : clock speed 500 kHz
+Error: JTAG scan chain interrogation failed: all ones
+Error: Check JTAG interface, timings, target power, etc.
+Error: Trying to use configured scan chain anyway...
+Error: rtl8710.cpu: IR capture error; saw 0x0f not 0x01
+Warn : Bypassing JTAG setup events due to errors
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Could not initialize the debug port
+Error: JTAG scan chain interrogation failed: all ones
+Error: Check JTAG interface, timings, target power, etc.
+Error: Trying to use configured scan chain anyway...
+Error: rtl8710.cpu: IR capture error; saw 0x0f not 0x01
+Warn : Bypassing JTAG setup events due to errors
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Invalid ACK (7) in DAP response
+Error: JTAG-DP STICKY ERROR
+Error: Could not initialize the debug port
+Error: Target not examined, reset NOT asserted!
+in procedure 'reset'
+in procedure 'ocd_bouncer'
