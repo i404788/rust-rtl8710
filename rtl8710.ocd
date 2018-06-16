@@ -3,6 +3,9 @@
 # Copyright (C) 2016 Rebane, rebane@alkohol.ee
 #
 
+# Lup Yuen: Change transport to SWD
+transport select swd
+
 source [find target/swj-dp.tcl]
 
 if { [info exists CHIPNAME] } {
