@@ -1,0 +1,37 @@
+user@padi:~/rtl8710_openocd$ openocd -f interface/jlink.cfg -f rtl8710.ocd -c "init" -c "reset halt"     -c "rtl8710_flash_read_id" -c "rtl8710_flash_read dump.bin 0 1048576" -c "shutdown"
+Open On-Chip Debugger 0.10.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+adapter speed: 500 kHz
+adapter_nsrst_delay: 100
+cortex_m reset_config sysresetreq
+rtl8710_reboot
+Info : No device selected, using first device.
+Info : J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Info : Hardware version: 7.00
+Info : VTarget = 3.300 V
+Info : clock speed 500 kHz
+Info : SWD DPIDR 0x2ba01477
+Info : rtl8710.cpu: hardware has 6 breakpoints, 4 watchpoints
+target halted due to debug-request, current mode: Thread
+xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+initializing RTL8710 flasher
+faultmask (/1): 0x01
+sp (/32): 0x20000000
+pc (/32): 0x10001000
+RTL8710 flasher initialized
+manufacturer ID: 0xC2, memory type: 0x20, memory capacity: 1048576 bytes
+read offset 0
+dumped 262144 bytes in 14.651714s (17.472 KiB/s)
+read 262144 bytes
+read offset 262144
+dumped 262144 bytes in 14.711292s (17.402 KiB/s)
+read 262144 bytes
+read offset 524288
+dumped 262144 bytes in 14.669493s (17.451 KiB/s)
+read 262144 bytes
+read offset 786432
+dumped 262144 bytes in 14.646487s (17.479 KiB/s)
+read 262144 bytes
+shutdown command invoked
