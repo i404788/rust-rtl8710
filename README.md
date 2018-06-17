@@ -131,13 +131,22 @@ Device: `/dev/ttyUSB0` or `/dev/ttyUSB1`
 
 ## Flashing and debugging the PADI from Visual Studio Code
 
-TODO: Open workspace
+Open the Visual Studio Code workspace:
+
+1. Install Video Studio Code from <br>
+    https://code.visualstudio.com/download
+
+1. Launch Video Studio Code with the command:
+
+    ```bash
+    code
+    ```
 
 1. Click `File → Open Workspace`
 
-1. Select `workspace.code-workspace`
+1. Browse to the `rustl8710` folder. Select `workspace.code-workspace`
 
-TODO: Install extensions
+Install the following Visual Studio Code extensions:
 
 1. Better TOML (bungcip)<br>
     https://marketplace.visualstudio.com/items?itemName=bungcip.better-toml
