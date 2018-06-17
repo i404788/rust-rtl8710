@@ -26,7 +26,8 @@ set debug frame 0
 set debug infrun 0
 set debug observer 0
 set debug overload 0
-set debugvarobj 0
+# Lup Yuen: Removed due to error.
+# set debugvarobj 0
 set pagination off
 set print address off
 set print symbol-filename off

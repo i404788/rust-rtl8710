@@ -8,8 +8,31 @@ TODO, but for now you can read background and usage instructions at: [https://po
 ```
 make setup GDB_SERVER=openocd
 ```
+### Write Flash Memory (using RTL SDK)
 
-### Read Flash Memory
+```
+make flash
+```
+
+### Debug Flash Code
+
+```
+make debug
+```
+
+### Write Flash Memory (using rtl8710.ocd)
+
+```
+openocd -f interface/jlink.cfg -f rtl8710.ocd \
+        -c "init" \
+        -c "reset halt" \
+        -c "rtl8710_flash_auto_erase 1" \
+        -c "rtl8710_flash_auto_verify 1" \
+        -c "rtl8710_flash_write application/Debug/bin/ram_all.bin 0" \
+        -c "shutdown"
+```
+
+### Read Flash Memory (using rtl8710.ocd)
 
 ```
 sudo apt install openocd
@@ -22,17 +45,6 @@ openocd -f interface/jlink.cfg -f rtl8710.ocd \
         -c "shutdown"
 ```
 
-### Write Flash Memory
-
-```
-openocd -f interface/jlink.cfg -f rtl8710.ocd \
-        -c "init" \
-        -c "reset halt" \
-        -c "rtl8710_flash_auto_erase 1" \
-        -c "rtl8710_flash_auto_verify 1" \
-        -c "rtl8710_flash_write application/Debug/bin/ram_all.bin 0" \
-        -c "shutdown"
-```
 ### References
 
 https://bitbucket.org/rebane/rtl8710_openocd/src
