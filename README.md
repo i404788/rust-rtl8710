@@ -1,11 +1,42 @@
 # rustl8710
 Rust on RTL8710
 
-TODO, but for now you can read background and usage instructions at: [https://polyfractal.com/post/rustl8710/](https://polyfractal.com/post/rustl8710/)
+Original background and usage instructions at: [https://polyfractal.com/post/rustl8710/](https://polyfractal.com/post/rustl8710/)
 
 ## Updates by Lup Yuen
 
 Updated scripts to use OpenOCD instead of JLink as JTAG tool, because JLink no longer works with PADI JTAG dongle. See https://forum.pine64.org/archive/index.php?thread-4579-2.html
+
+Tested on Ubuntu 18.04 LTS.
+
+### Install prerequisites
+
+```
+sudo apt update
+sudo apt install build-essential gawk bc libc6-dev:i386 lib32ncurses5-dev
+sudo apt install gcc-arm-none-eabi
+sudo apt install gdb-multiarch
+sudo apt install cutecom
+sudo apt install openocd
+```
+
+### Download rustl8710 code
+
+```
+git clone https://github.com/lupyuen/rustl8710
+```
+
+### Install Rust components
+
+Install `rustup`: https://rustup.rs/
+
+```
+cd rustl8710
+rustup update
+rustup override set nightly
+rustup component add rust-src
+cargo install xargo
+```
 
 ### Start OpenOCD for flashing and debugging
 
@@ -16,7 +47,6 @@ debug.sh
 ### Select openocd instead of jlink as JTAG tool
 
 ```
-sudo apt install gdb-multiarch
 make setup GDB_SERVER=openocd
 ```
 
@@ -35,7 +65,6 @@ make debug
 ### Write Flash Memory (using rtl8710.ocd)
 
 ```
-sudo apt install openocd
 openocd -f interface/jlink.cfg -f rtl8710.ocd \
         -c "init" \
         -c "reset halt" \
@@ -56,6 +85,7 @@ openocd -f interface/jlink.cfg -f rtl8710.ocd \
         -c "rtl8710_flash_read dump.bin 0 1048576" \
         -c "shutdown"
 ```
+
 ### References
 
 https://bitbucket.org/rebane/rtl8710_openocd/src
