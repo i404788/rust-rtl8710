@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [        
+        {
+            "type": "gdb",
+            "name": "Debug PADI",
+            "cwd": "${workspaceRoot}",
+
+            "request": "attach",
+            "executable": "./application/Debug/bin/application.axf",
+            "target": ":3333",
+            "remote": true,
+
+            // "request": "launch",
+            // "target": "./application/Debug/bin/application.axf",
+            // "debugServer": 3333,
+
+            // "terminal": "",
+
+            "autorun": [
+                // "set architecture arm",
+                // "set remotetimeout 100000",
+                "monitor reset init",
+                "monitor sleep 20",
+                "monitor halt"
+            ]
+        }
+    ]
+}

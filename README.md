@@ -1,6 +1,6 @@
 # rustl8710 - Rust on PADI Realtek RTL8710
 
-Original background and usage instructions at: [https://polyfractal.com/post/rustl8710/](https://polyfractal.com/post/rustl8710/)
+Original background and usage instructions at [https://polyfractal.com/post/rustl8710/](https://polyfractal.com/post/rustl8710/)
 
 ## Updates by Lup Yuen
 
@@ -9,7 +9,9 @@ Original background and usage instructions at: [https://polyfractal.com/post/rus
 - Replaced `gdb-arm-none-eabi` (obsolete) by `gdb-multiarch`
 
 Tested on:
+
 - Ubuntu 18.04 LTS x86 64-bit on Oracle VirtualBox 5.2.12 (hosted on Windows 10)
+
 - Ubuntu 18.04 LTS x86 64-bit on Cherry Atom notebook PC
 
 ## Hardware components
@@ -28,7 +30,7 @@ Tested on:
 
 ## Install prerequisites
 
-```
+```bash
 sudo apt update
 sudo apt install build-essential gawk bc libc6-dev:i386 lib32ncurses5-dev
 sudo apt install gcc-arm-none-eabi
@@ -39,7 +41,7 @@ sudo apt install openocd
 
 ## Download rustl8710 code
 
-```
+```bash
 git clone https://github.com/lupyuen/rustl8710
 ```
 
@@ -48,7 +50,8 @@ git clone https://github.com/lupyuen/rustl8710
 Install `rustup` from https://rustup.rs/
 
 Then run the following commands:
-```
+
+```bash
 cd rustl8710
 rustup update
 rustup override set nightly
@@ -58,13 +61,13 @@ cargo install xargo
 
 ## Select OpenOCD instead of JLink as JTAG tool
 
-```
+```bash
 make setup GDB_SERVER=openocd
 ```
 
 ## Build flash image
 
-```
+```bash
 make
 ```
 
@@ -79,29 +82,34 @@ TODO
 ## Start OpenOCD for flashing and debugging
 
 Run this command in a new window before writing the flash image or debugging:
-```
+
+```bash
 debug.sh
 ```
 
 ## Write flash image (using Realtek SDK)
 
-```
+```bash
 make flash
 ```
 
 ## Debug flash code
 
-```
+```bash
 make debug
 ```
 
 Common GDB commands:
+
 - `step`: Execute the current source line, step into functions if present.
+
 - `next`: Execute the current source line, don't step into functions.
+
 - `where`: Show stack trace.
+
 - `where full`: Show stack trace with local variables.
 
-Summary of GDB commands: https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
+Summary of GDB commands: <br> https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
 
 ## Run flash code
 
@@ -111,7 +119,7 @@ TODO: Run cutecom or putty
 
 ## Read flash memory (using rtl8710.ocd)
 
-```
+```bash
 openocd -f interface/jlink.cfg -f rtl8710.ocd \
         -c "init" \
         -c "reset halt" \
@@ -122,7 +130,7 @@ openocd -f interface/jlink.cfg -f rtl8710.ocd \
 
 ## Write flash memory image (using rtl8710.ocd)
 
-```
+```bash
 openocd -f interface/jlink.cfg -f rtl8710.ocd \
         -c "init" \
         -c "reset halt" \
@@ -134,10 +142,17 @@ openocd -f interface/jlink.cfg -f rtl8710.ocd \
 
 ## References
 
+Official PADI docs: <br>
+https://www.pine64.org/?page_id=946
+
+Original rustl8710 article: <br>
 https://polyfractal.com/post/rustl8710/
 
+JLink no longer works with the PADI SWD Debugger USB dongle: <br>
 https://forum.pine64.org/archive/index.php?thread-4579-2.html
 
+Alternative OpenOCD config (rtl8710.ocd): <br>
 https://bitbucket.org/rebane/rtl8710_openocd/src
 
+Using OpenOCD with SWD Transport: <br>
 http://openocd.org/doc-release/html/Debug-Adapter-Configuration.html#SWD-Transport
