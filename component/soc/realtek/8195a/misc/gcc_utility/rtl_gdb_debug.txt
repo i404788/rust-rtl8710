@@ -3,7 +3,7 @@
 #===============================================================================
 #set GDB connection 
 set remotetimeout 100000
-target remote :2331
+target remote :3333
 
 #===============================================================================
 #Message display setting
@@ -35,9 +35,9 @@ set debug parser off
 set debug remote 0
 
 #===============================================================================
-monitor reset 1
+monitor reset init
 monitor sleep 20
-monitor clrbp
+monitor halt
 #===============================================================================
 #Load flash download file
 file ./application/Debug/bin/application.axf

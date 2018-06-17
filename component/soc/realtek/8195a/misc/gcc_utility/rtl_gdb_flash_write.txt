@@ -2,26 +2,23 @@
 set architecture arm
 
 # GDB script for loading ram.bin process
-printf "Start GDB loading script...\n"
 
 #===============================================================================
 #set GDB connection
-printf "Set GDB Connection...\n"
 set remotetimeout 100000
-target remote :2331
+target remote :3333
 
 #===============================================================================
 #set file path
-printf "Set File Path...\n"
 set $BINFILE = "./application/Debug/bin/ram_all.bin"
 
 #===============================================================================
 #Message display setting
 #disable all messages
 
-printf "Disable message logging...\n"
+####set verbose off
+set verbose on
 
-set verbose off
 set complaints 0
 set confirm off
 set exec-done-display off
@@ -35,7 +32,10 @@ set debug frame 0
 set debug infrun 0
 set debug observer 0
 set debug overload 0
-#set debugvarobj 0
+####set debugvarobj 0
+
+printf "a1\n"
+
 set pagination off
 set print address off
 set print symbol-filename off
@@ -48,17 +48,12 @@ set debug remote 0
 
 #===============================================================================
 #set JTAG and external SRAM
-printf "Set JTAG/SRAM settings...\n"
-
-monitor reset 1
+monitor reset init
+monitor halt
 monitor sleep 20
-monitor clrbp
-
 #===============================================================================
 #Variables declaration (1)
 #binary file size
-printf "Variable Declarations...\n"
-
 set $RamFileSize = 0x0000
 source util/fwsize.gdb
 printf "-------------------------------\n"
@@ -88,7 +83,6 @@ file component/soc/realtek/8195a/misc/gcc_utility/target_NORMAL.axf
 lo
 
 printf "Load flash controller.\n"
-
 #===============================================================================
 #Set for executing flash controller funciton
 set $Temp = {int}($PERI_ON_BASE+$REG_SOC_PERI_FUNC0_EN)
