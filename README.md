@@ -1,14 +1,30 @@
-# rustl8710: Rust on RTL8710
+# rustl8710 - Rust on PADI Realtek RTL8710
 
 Original background and usage instructions at: [https://polyfractal.com/post/rustl8710/](https://polyfractal.com/post/rustl8710/)
 
 ## Updates by Lup Yuen
 
-The rustl8710 code has been updated to use OpenOCD instead of JLink as the JTAG tool, because JLink no longer works with the PADI JTAG USB dongle. See https://forum.pine64.org/archive/index.php?thread-4579-2.html
+- The rustl8710 code has been updated to use OpenOCD instead of JLink as the JTAG tool for flashing and debugging, because JLink no longer works with the PADI SWD Debugger USB dongle. See https://forum.pine64.org/archive/index.php?thread-4579-2.html
+
+- Replaced `gdb-arm-none-eabi` (obsolete) by `gdb-multiarch`
 
 Tested on:
 - Ubuntu 18.04 LTS x86 64-bit on Oracle VirtualBox 5.2.12 (hosted on Windows 10)
 - Ubuntu 18.04 LTS x86 64-bit on Cherry Atom notebook PC
+
+## Hardware components
+
+- PADI IoT Stamp with Assembled PADI Breadboard Adapter
+
+    https://www.pine64.org/?product=assembled-padi-breadboard-adapter
+
+- PADI SWD Debugger
+
+    https://www.pine64.org/?product=swd-debugger
+
+- PADI Serial Console
+
+    https://www.pine64.org/?product=padi-serial-console
 
 ## Install prerequisites
 
@@ -52,6 +68,14 @@ make setup GDB_SERVER=openocd
 make
 ```
 
+## Connect PADI and SWD Debugger to computer
+
+TODO
+
+## Redirect SWD Debugger port from Windows to VirtualBox
+
+TODO
+
 ## Start OpenOCD for flashing and debugging
 
 Run this command in a new window before writing the flash image or debugging:
@@ -79,17 +103,11 @@ Common GDB commands:
 
 Summary of GDB commands: https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
 
-## Write flash image (using rtl8710.ocd)
+## Run flash code
 
-```
-openocd -f interface/jlink.cfg -f rtl8710.ocd \
-        -c "init" \
-        -c "reset halt" \
-        -c "rtl8710_flash_auto_erase 1" \
-        -c "rtl8710_flash_auto_verify 1" \
-        -c "rtl8710_flash_write application/Debug/bin/ram_all.bin 0" \
-        -c "shutdown"
-```
+TODO: Connect PADI and Serial Console to computer
+
+TODO: Run cutecom or putty
 
 ## Read flash memory (using rtl8710.ocd)
 
@@ -99,6 +117,18 @@ openocd -f interface/jlink.cfg -f rtl8710.ocd \
         -c "reset halt" \
         -c "rtl8710_flash_read_id" \
         -c "rtl8710_flash_read dump.bin 0 1048576" \
+        -c "shutdown"
+```
+
+## Write flash memory image (using rtl8710.ocd)
+
+```
+openocd -f interface/jlink.cfg -f rtl8710.ocd \
+        -c "init" \
+        -c "reset halt" \
+        -c "rtl8710_flash_auto_erase 1" \
+        -c "rtl8710_flash_auto_verify 1" \
+        -c "rtl8710_flash_write dump.bin 0" \
         -c "shutdown"
 ```
 
