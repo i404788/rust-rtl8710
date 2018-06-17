@@ -9,10 +9,32 @@
             "name": "Debug PADI",
             "cwd": "${workspaceRoot}",
 
-            "request": "attach",
-            "executable": "./application/Debug/bin/application.axf",
-            "target": ":3333",
-            "remote": true,
+            "request": "launch",
+            "target": "./application/Debug/bin/application.axf",
+            // "debugServer": 3333,
+
+            // "request": "attach",
+            // "executable": "./application/Debug/bin/application.axf",
+            // "target": ":3333",
+            // "remote": true,
+
+            // "gdbpath": "make",
+            // "debugger_args": [ "debug" ],
+
+            "gdbpath": "gdb-multiarch",
+            "debugger_args": [
+                "-x",
+                "component/soc/realtek/8195a/misc/gcc_utility/rtl_gdb_debug.txt"
+            ],
+
+            "valuesFormatting": "disabled",
+            "printCalls": true,
+            "showDevDebugOutput": true,
+
+            //"debugServer": 4711
+            //"env": null
+            //"internalConsoleOptions": "openOnFirstSessionStart"
+            //"preLaunchTask": ""
 
             // "request": "launch",
             // "target": "./application/Debug/bin/application.axf",
@@ -20,13 +42,13 @@
 
             // "terminal": "",
 
-            "autorun": [
+            // "autorun": [
                 // "set architecture arm",
                 // "set remotetimeout 100000",
-                "monitor reset init",
-                "monitor sleep 20",
-                "monitor halt"
-            ]
+                // "monitor reset init",
+                // "monitor sleep 20",
+                // "monitor halt"
+            // ]
         }
     ]
 }
