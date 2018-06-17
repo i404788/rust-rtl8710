@@ -12,7 +12,7 @@ Tested on:
 
 - Ubuntu 18.04 LTS x86 64-bit on Oracle VirtualBox 5.2.12 (hosted on Windows 10)
 
-- Ubuntu 18.04 LTS x86 64-bit on Cherry Atom notebook PC
+- Ubuntu 18.04 LTS x86 64-bit on Intel Atom x5-Z8300 notebook PC
 
 ## Hardware components
 
