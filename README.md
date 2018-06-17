@@ -84,7 +84,7 @@ TODO
 Run this command in a new window before writing the flash image or debugging:
 
 ```bash
-debug.sh
+./debug.sh
 ```
 
 ## Write flash image (using Realtek SDK)
@@ -116,6 +116,12 @@ Summary of GDB commands: <br> https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
 TODO: Connect PADI and Serial Console to computer
 
 TODO: Run cutecom or putty
+
+```bash
+sudo cutecom
+```
+
+Device: `/dev/ttyUSB0` or `/dev/ttyUSB1`
 
 ## Read flash memory (using rtl8710.ocd)
 
