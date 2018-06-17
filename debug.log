@@ -1,0 +1,149 @@
+debug.sh
+
+Open On-Chip Debugger 0.10.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+adapter speed: 500 kHz
+adapter_nsrst_delay: 100
+cortex_m reset_config sysresetreq
+rtl8710_reboot
+Info : No device selected, using first device.
+Info : J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+Info : Hardware version: 7.00
+Info : VTarget = 3.300 V
+Info : clock speed 500 kHz
+Info : SWD DPIDR 0x2ba01477
+Info : rtl8710.cpu: hardware has 6 breakpoints, 4 watchpoints
+Info : accepting 'gdb' connection on tcp/3333
+undefined debug reason 7 - target needs reset
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffffffe
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffffffe
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : dropped 'gdb' connection
+Info : accepting 'gdb' connection on tcp/3333
+undefined debug reason 7 - target needs reset
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffffffe
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffffffe
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+target halted due to debug-request, current mode: Thread
+xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+Info : dropped 'gdb' connection
+Info : accepting 'gdb' connection on tcp/3333
+target halted due to debug-request, current mode: Thread
+xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+Warn : Receiving data from device timed out, retrying.
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffffffe
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffffffe
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0x3539313c
+Info : dropped 'gdb' connection
+Info : accepting 'gdb' connection on tcp/3333
+target halted due to debug-request, current mode: Thread
+xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+Info : dropped 'gdb' connection
+Info : accepting 'gdb' connection on tcp/3333
+target halted due to debug-request, current mode: Thread
+xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffffffe
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffffffe
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0x3539313c
+Warn : Receiving data from device timed out, retrying.
+Info : dropped 'gdb' connection
+Warn : Receiving data from device timed out, retrying.
+Info : accepting 'gdb' connection on tcp/3333
+target halted due to debug-request, current mode: Thread
+xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+Warn : Receiving data from device timed out, retrying.
+Warn : Receiving data from device timed out, retrying.
+Info : dropped 'gdb' connection
+Info : accepting 'gdb' connection on tcp/3333
+target halted due to debug-request, current mode: Thread
+xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+Info : dropped 'gdb' connection
+Info : accepting 'gdb' connection on tcp/3333
+target halted due to debug-request, current mode: Thread
+xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+Warn : Receiving data from device timed out, retrying.
+Info : dropped 'gdb' connection
+Info : accepting 'gdb' connection on tcp/3333
+target halted due to debug-request, current mode: Thread
+xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffffffe
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffffffe
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0xfffff000
+Info : SWD DPIDR 0x2ba01477
+Error: Failed to read memory at 0x3539313c
+Info : dropped 'gdb' connection
+Info : accepting 'gdb' connection on tcp/3333
+target halted due to debug-request, current mode: Thread
+xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+Info : dropped 'gdb' connection

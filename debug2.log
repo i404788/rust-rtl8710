@@ -1,0 +1,156 @@
+make debug
+
+make[1]: Entering directory '/home/user/rustl8710'
+gdb-multiarch -x component/soc/realtek/8195a/misc/gcc_utility/rtl_gdb_debug.txt
+GNU gdb (Ubuntu 8.1-0ubuntu3) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+The target architecture is assumed to be arm
+warning: No executable has been specified and target does not support
+determining executable automatically.  Try using the "file" command.
+0x100025bc in ?? ()
+Notification of completion for asynchronous execution commands is off.
+target halted due to debug-request, current mode: Thread
+xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+Breakpoint 1: file src/c/src/main.c, line 16.
+
+Breakpoint 1, main () at src/c/src/main.c:16
+16          main_entry();
+(gdb) step
+main_entry () at src/lib.rs:23
+23      pub extern fn main_entry() {
+(gdb) step
+24          let mut s = Serial::new();
+(gdb) step
+rustl8710::serial::Serial::new () at src/serial.rs:12
+12                  pipe: serial_t::default()
+(gdb) step
+<rustl8710::hal::serial_s as core::default::Default>::default () at src/hal.rs:4469
+4469        fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+(gdb) step
+core::mem::zeroed () at /home/user/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/mem.rs:520
+520         intrinsics::init()
+(gdb) step
+521     }
+(gdb) step
+rustl8710::serial::Serial::new () at src/serial.rs:11
+11              let mut s = Serial {
+(gdb) step
+15                  serial_init(&mut s.pipe, SERIAL_TX, SERIAL_RX);
+(gdb) step
+serial_init (obj=, tx=PA_3, rx=PA_0) at component/common/mbed/targets/hal/rtl8195a/serial_api.c:85
+85          uart_tx = pinmap_peripheral(tx, PinMap_UART_TX);
+(gdb) step
+73      {
+(gdb) step
+85          uart_tx = pinmap_peripheral(tx, PinMap_UART_TX);
+(gdb) step
+73      {
+(gdb) step
+85          uart_tx = pinmap_peripheral(tx, PinMap_UART_TX);
+(gdb) step
+pinmap_peripheral (pin=PA_3, map=map@entry=) at component/common/mbed/targets/hal/rtl8195a/pinmap_common.c:67
+67          if (pin == (PinName)NC)
+(gdb) where full
+#0  pinmap_peripheral (pin=PA_3, map=map@entry=) at component/common/mbed/targets/hal/rtl8195a/pinmap_common.c:67
+        peripheral = 4294967295
+        __FUNCTION__ = "pinmap_peripheral"
+#1  serial_init (obj=, tx=<optimized out>, rx=PA_0) at component/common/mbed/targets/hal/rtl8195a/serial_api.c:85
+        uart_tx = <optimized out>
+        uart_rx = <optimized out>
+        uart_sel = <optimized out>
+        uart_idx = <optimized out>
+        pHalRuartOp = <optimized out>
+        pHalRuartAdapter = <optimized out>
+        pHalRuartDmaCfg = <optimized out>
+        pHalGdmaOp =
+        __FUNCTION__ = "serial_init"
+#2  rustl8710::serial::Serial::new () at src/serial.rs:15
+        s = rustl8710::serial::Serial {pipe: rustl8710::hal::serial_s {hal_uart_op: rustl8710::hal::_HAL_RUART_OP_ {HalRuartAdapterLoadDef: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void, u8)>::None, HalRuartTxGdmaLoadDef: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void, *mut rustl8710::ctypes::c_void)>::None, HalRuartRxGdmaLoadDef: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void, *mut rustl8710::ctypes::c_void)>::None, HalRuartResetRxFifo: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void) -> rustl8710::hal::_HAL_Status>::None, HalRuartInit: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void) -> rustl8710::hal::_HAL_Status>::None, HalRuartDeInit: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None, HalRuartPutC: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void, u8) -> rustl8710::hal::_HAL_Status>::None, HalRuartSend: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void, *mut u8, u32, u32) -> u32>::None, HalRuartIntSend: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void, *mut u8, u32) -> rustl8710::hal::_HAL_Status>::None, HalRuartDmaSend: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void, *mut u8, u32) -> rustl8710::hal::_HAL_Status>::None, HalRuartStopSend: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void) -> rustl8710::hal::_HAL_Status>::None, HalRuartGetC: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void, *mut u8) -> rustl8710::hal::_HAL_Status>::None, HalRuartRecv: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void,*mut u8, u32, u32) -> u32>::None, HalRuartIntRecv: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void, *mut u8, u32) -> rustl8710::hal::_HAL_Status>::None, HalRuartDmaRecv: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void, *mut u8, u32) -> rustl8710::hal::_HAL_Status>::None, HalRuartStopRecv: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void) -> rustl8710::hal::_HAL_Status>::None, HalRuartGetIMR: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void) -> u8>::None, HalRuartSetIMR: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None, HalRuartGetDebugValue: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void, u32) -> u32>::None, HalRuartDmaInit: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None, HalRuartRTSCtrl: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void, u8)>::None, HalRuartRegIrq: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None, HalRuartIntEnable: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None, HalRuartIntDisable: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None}, hal_uart_adp: rustl8710::hal::_HAL_RUART_ADAPTER_ {BaudRate: 0, FlowControl: 0, FifoControl: 0, Interrupts: 0, TxCount: 0, RxCount: 0, pTxBuf: , pRxBuf: , State: rustl8710::hal::_HAL_UART_State_::HAL_UART_STATE_NULL, Status: 0, Locked: 0, UartIndex: 0, WordLen: 0, StopBit: 0, Parity: 0, ParityType: 0, StickParity: 0, ModemStatus: 0, DmaEnable: 0, TestCaseNumber: 0, PinmuxSelect: 0, PullMode: 0, IrqHandle: rustl8710::hal::_IRQ_HANDLE_ {IrqFun: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None, IrqNum: rustl8710::hal::_IRQn_Type_::SYSTEM_ON_IRQ, Data: 0, Priority: 0}, DmaConfig: , ModemStatusInd: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None, TxTDCallback: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None, RxDRCallback: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None, TxCompCallback: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None, RxCompCallback: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None, TxTDCbPara: , RxDRCbPara: , TxCompCbPara: , RxCompCbPara: , EnterCritical: core::option::Option<extern "C" fn()>::None, ExitCritical: core::option::Option<extern "C" fn()>::None, pDefaultBaudRateTbl: , pDefaultOvsrRTbl: , pDefaultDivTbl: , pDefOvsrAdjBitTbl_10: , pDefOvsrAdjBitTbl_9: , pDefOvsrAdjBitTbl_8: , pDefOvsrAdjTbl_10: , pDefOvsrAdjTbl_9: , pDefOvsrAdjTbl_8: , pTxDMAMBlk: , pRxDMAMBlk: , BaudRateUsing: 0, WordLenUsing: 0, ParityUsing: 0, RTSCtrl: 0}, uart_gdma_cfg: rustl8710::hal::_UART_DMA_CONFIG_ {TxDmaEnable: 0, RxDmaEnable: 0, TxDmaBurstSize: 0, RxDmaBurstSize: 0, pHalGdmaOp: , pTxHalGdmaAdapter: , pRxHalGdmaAdapter: , TxGdmaIrqHandle: rustl8710::hal::_IRQ_HANDLE_ {IrqFun: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None, IrqNum: rustl8710::hal::_IRQn_Type_::SYSTEM_ON_IRQ, Data: 0, Priority: 0}, RxGdmaIrqHandle: rustl8710::hal::_IRQ_HANDLE_ {IrqFun: core::option::Option<unsafe extern "C" fn(*mut rustl8710::ctypes::c_void)>::None, IrqNum:rustl8710::hal::_IRQn_Type_::SYSTEM_ON_IRQ, Data: 0, Priority: 0}, pTxDmaBlkList: , pRxDmaBlkList: , TxDmaMBChnl: 0, RxDmaMBChnl: 0}, uart_gdma_adp_tx: rustl8710::hal::_HAL_GDMA_ADAPTER_ {ChSar: 0, ChDar: 0, ChEn: rustl8710::hal::_GDMA_CHANNEL_NUM_::GdmaNoCh, GdmaCtl: rustl8710::hal::_GDMA_CTL_REG_ {TtFc: rustl8710::hal::_GDMA_CTL_TT_FC_TYPE_::TTFCMemToMem, DstTrWidth: rustl8710::hal::_GDMA_CTL_TR_WIDTH_::TrWidthOneByte, SrcTrWidth: rustl8710::hal::_GDMA_CTL_TR_WIDTH_::TrWidthOneByte, Dinc: rustl8710::hal::_GDMA_INC_TYPE_::IncType, Sinc: rustl8710::hal::_GDMA_INC_TYPE_::IncType, DestMsize: rustl8710::hal::_GDMA_CTL_MSIZE_::MsizeOne, SrcMsize: rustl8710::hal::_GDMA_CTL_MSIZE_::MsizeOne, _bindgen_bitfield_1_: 0, _bindgen_bitfield_2_: 0, _bindgen_bitfield_3_: 0, _bindgen_bitfield_4_: 0, _bindgen_bitfield_5_: 0, _bindgen_bitfield_6_: 0, _bindgen_bitfield_7_: 0, BlockSize: 0}, GdmaCfg: rustl8710::hal::_GDMA_CFG_REG_ {ChPrior: rustl8710::hal::_GDMA_CH_PRIORITY_::Prior0, LockBL: rustl8710::hal::_GDMA_LOCK_LEVEL_::OverComplDmaTransfer, LockChL: rustl8710::hal::_GDMA_LOCK_LEVEL_::OverComplDmaTransfer, MaxAbrst: 0, SrcPer: 0, DestPer: 0, _bindgen_bitfield_1_: 0, _bindgen_bitfield_2_: 0, _bindgen_bitfield_3_: 0, _bindgen_bitfield_4_: 0, _bindgen_bitfield_5_: 0, _bindgen_bitfield_6_: 0, _bindgen_bitfield_7_: 0, _bindgen_bitfield_8_: 0, _bindgen_bitfield_9_: 0, _bindgen_bitfield_10_: 0, _bindgen_bitfield_11_: 0, _bindgen_bitfield_12_: 0, _bindgen_bitfield_13_: 0, _bindgen_bitfield_14_: 0}, PacketLen: 0, BlockLen: 0, MuliBlockCunt: 0, MaxMuliBlock: 0, pLlix: , pBlockSizeList: , pLli: , NextPlli: 0, TestItem: 0, ChNum: 0, GdmaIndex: 0, _bindgen_bitfield_1_: 0, _bindgen_bitfield_2_: 0, _bindgen_bitfield_3_: 0, _bindgen_bitfield_4_: 0, _bindgen_bitfield_5_: 0, GdmaIsrType: 0}, uart_gdma_adp_rx: rustl8710::hal::_HAL_GDMA_ADAPTER_ {ChSar: 0, ChDar: 0, ChEn: rustl8710::hal::_GDMA_CHANNEL_NUM_::GdmaNoCh, GdmaCtl: rustl8710::hal::_GDMA_CTL_REG_ {TtFc: rustl8710::hal::_GDMA_CTL_TT_FC_TYPE_::TTFCMemToMem, DstTrWidth: rustl8710::hal::_GDMA_CTL_TR_WIDTH_::TrWidthOneByte, SrcTrWidth: rustl8710::hal::_GDMA_CTL_TR_WIDTH_::TrWidthOneByte, Dinc: rustl8710::hal::_GDMA_INC_TYPE_::IncType, Sinc: rustl8710::hal::_GDMA_INC_TYPE_::IncType, DestMsize: rustl8710::hal::_GDMA_CTL_MSIZE_::MsizeOne, SrcMsize: rustl8710::hal::_GDMA_CTL_MSIZE_::MsizeOne, _bindgen_bitfield_1_: 0, _bindgen_bitfield_2_: 0, _bindgen_bitfield_3_: 0, _bindgen_bitfield_4_: 0, _bindgen_bitfield_5_: 0, _bindgen_bitfield_6_: 0, _bindgen_bitfield_7_: 0, BlockSize: 0}, GdmaCfg: rustl8710::hal::_GDMA_CFG_REG_ {ChPrior: rustl8710::hal::_GDMA_CH_PRIORITY_::Prior0, LockBL: rustl8710::hal::_GDMA_LOCK_LEVEL_::OverComplDmaTransfer, LockChL: rustl8710::hal::_GDMA_LOCK_LEVEL_::OverComplDmaTransfer, MaxAbrst: 0, SrcPer: 0, DestPer: 0, _bindgen_bitfield_1_: 0, _bindgen_bitfield_2_: 0, _bindgen_bitfield_3_: 0, _bindgen_bitfield_4_: 0, _bindgen_bitfield_5_: 0, _bindgen_bitfield_6_: 0, _bindgen_bitfield_7_: 0, _bindgen_bitfield_8_: 0, _bindgen_bitfield_9_: 0, _bindgen_bitfield_10_: 0, _bindgen_bitfield_11_: 0, _bindgen_bitfield_12_: 0, _bindgen_bitfield_13_: 0, _bindgen_bitfield_14_: 0}, PacketLen: 0, BlockLen: 0, MuliBlockCunt: 0, MaxMuliBlock: 0, pLlix: , pBlockSizeList: , pLli: , NextPlli: 0, TestItem: 0, ChNum: 0, GdmaIndex: 0, _bindgen_bitfield_1_: 0, _bindgen_bitfield_2_: 0, _bindgen_bitfield_3_: 0, _bindgen_bitfield_4_: 0, _bindgen_bitfield_5_: 0, GdmaIsrType: 0}, gdma_multiblk_list_tx: rustl8710::hal::_HAL_UART_DMA_MULTIBLK_ {GdmaChLli: [rustl8710::hal::_GDMA_CH_LLI_ELE_ {Sarx: 0, Darx: 0, Llpx: 0, CtlxLow: 0, CtlxUp: 0, Temp: 0} <repeats 16 times>], Lli: [rustl8710::hal::GDMA_CH_LLI {pLliEle: , pNextLli: } <repeats 16 times>], BlockSizeList: [rustl8710::hal::BLOCK_SIZE_LIST {BlockSize: 0, pNextBlockSiz: } <repeats 16 times>]}, gdma_multiblk_list_rx: rustl8710::hal::_HAL_UART_DMA_MULTIBLK_ {GdmaChLli: [rustl8710::hal::_GDMA_CH_LLI_ELE_ {Sarx: 0, Darx: 0, Llpx: 0, CtlxLow: 0, CtlxUp: 0, Temp: 0} <repeats 16 times>], Lli: [rustl8710::hal::GDMA_CH_LLI {pLliEle: , pNextLli: } <repeats 16 times>], BlockSizeList: [rustl8710::hal::BLOCK_SIZE_LIST {BlockSize: 0, pNextBlockSiz: } <repeats 16 times>]}, tx_len: 0, rx_len: 0}}
+#3  main_entry () at src/lib.rs:24
+No locals.
+#4  _AppStart () at ../../../component/soc/realtek/8195a/cmsis/device/app_start.c:220
+No locals.
+#5  ?? ()
+No symbol table info available.
+(gdb) step
+69          peripheral = pinmap_find_peripheral(pin, map);
+(gdb) step
+pinmap_find_peripheral (pin=PA_3, map=) at component/common/mbed/targets/hal/rtl8195a/pinmap_common.c:56
+56          while (map->pin != NC) {
+(gdb) step
+57              if (map->pin == pin)
+(gdb) step
+56          while (map->pin != NC) {
+(gdb) step
+56          while (map->pin != NC) {
+(gdb) step
+56          while (map->pin != NC) {
+(gdb) step
+56          while (map->pin != NC) {
+(gdb) q
+Detaching from program: /home/user/rustl8710/application/Debug/bin/application.axf, Remote target
+Ending remote debugging.
+make[1]: Leaving directory '/home/user/rustl8710'
+
+make debug
+
+make[1]: Entering directory '/home/user/rustl8710'
+gdb-multiarch -x component/soc/realtek/8195a/misc/gcc_utility/rtl_gdb_debug.txt
+GNU gdb (Ubuntu 8.1-0ubuntu3) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+The target architecture is assumed to be arm
+warning: No executable has been specified and target does not support
+determining executable automatically.  Try using the "file" command.
+0x1001a18c in ?? ()
+Notification of completion for asynchronous execution commands is off.
+target halted due to debug-request, current mode: Thread
+xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+Breakpoint 1: file src/c/src/main.c, line 16.
+
+Breakpoint 1, main () at src/c/src/main.c:16
+16          main_entry();
+(gdb) step
+main_entry () at src/lib.rs:23
+23      pub extern fn main_entry() {
+(gdb) step
+24          let mut s = Serial::new();
+(gdb) next
+26          s.tx_string("Hello from Rust!\n");
+(gdb) next
+28          loop {
+(gdb) next
+29              let data = s.rx_i32();
+(gdb) next
+^C
+Program received signal SIGINT, Interrupt.
+serial_readable (obj=) at component/common/mbed/targets/hal/rtl8195a/serial_api.c:350
+350         if ((HAL_RUART_READ32(uart_idx, RUART_LINE_STATUS_REG_OFF)) & RUART_LINE_STATUS_REG_DR) {
+(gdb) q
+Detaching from program: /home/user/rustl8710/application/Debug/bin/application.axf, Remote target
+Ending remote debugging.
+Makefile:30: recipe for target 'debug' failed
+make: *** [debug] Interrupt

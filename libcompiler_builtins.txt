@@ -1,4 +1,5 @@
-objdump -g -s -t -C -l /home/user/.xargo/lib/rustlib/thumbv7m-none-eabi/lib/libcompiler_builtins-960f6ee258236a65.rlib
+objdump -g -s -t -C -l ~/.xargo/lib/rustlib/thumbv7m-none-eabi/lib/libcompiler_builtins-960f6ee258236a65.rlib >libcompiler_builtins.txt
+
 In archive /home/user/.xargo/lib/rustlib/thumbv7m-none-eabi/lib/libcompiler_builtins-960f6ee258236a65.rlib:
 
 compiler_builtins-960f6ee258236a65.compiler_builtins0-c45f48832aa285c5e38c35b1db96a0c6.rs.rcgu.o:     file format elf32-little

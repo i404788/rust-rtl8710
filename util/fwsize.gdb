@@ -1,1 +1,1 @@
-set $RamFileSize = 0x51588
+set $RamFileSize = 0x50FB0
