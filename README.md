@@ -3,11 +3,22 @@ Rust on RTL8710
 
 TODO, but for now you can read background and usage instructions at: [https://polyfractal.com/post/rustl8710/](https://polyfractal.com/post/rustl8710/)
 
+## Updates by Lup Yuen
+
+Updated scripts to use OpenOCD instead of JLink as JTAG tool, because JLink no longer works with PADI JTAG dongle. See https://forum.pine64.org/archive/index.php?thread-4579-2.html
+
+### Start OpenOCD for flashing and debugging
+
+```
+debug.sh
+```
+
 ### Select openocd instead of jlink as JTAG tool
 
 ```
 make setup GDB_SERVER=openocd
 ```
+
 ### Write Flash Memory (using RTL SDK)
 
 ```
