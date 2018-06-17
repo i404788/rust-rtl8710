@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "/home/user/.cargo/git/checkouts/freertos.rs-2613393845a650a6"
+		},
+		{
+			"path": "/home/user/rtl8710_openocd"
 		}
 	],
 	"settings": {}

@@ -385,8 +385,8 @@ SRC_C_LIST = $(notdir $(SRC_C)) $(notdir $(DRAM_C))
 OBJ_LIST = $(addprefix $(OBJ_DIR)/,$(patsubst %.c,%.o,$(SRC_C_LIST)))
 
 # Rust lib
-# Lup Yuen: Added libfreertos_rs
-OBJ_LIST += $(TARGET)/Debug/rust_obj/librustl8710.o $(TARGET)/Debug/rust_obj/libfreertos_rs.o
+# Lup Yuen: Added libfreertos_rs, libcore, liballoc, libcompiler_builtins.
+OBJ_LIST += $(TARGET)/Debug/rust_obj/librustl8710.o $(TARGET)/Debug/rust_obj/libfreertos_rs.o $(TARGET)/Debug/rust_obj/libcore.o $(TARGET)/Debug/rust_obj/liballoc.o $(TARGET)/Debug/rust_obj/libcompiler_builtins.o
 
 DEPENDENCY_LIST = $(addprefix $(OBJ_DIR)/,$(patsubst %.c,%.d,$(SRC_C_LIST)))
 
@@ -553,6 +553,8 @@ endif
 
 .PHONY: clean
 clean:
+	# Lup Yuen: Remove all cross-compiled binaries.
+	rm -r ~/.xargo/lib/rustlib
 	rm -rf $(TARGET)
 	rm -f $(SRC_O) $(DRAM_O)
 	rm -f $(patsubst %.o,%.d,$(SRC_O)) $(patsubst %.o,%.d,$(DRAM_O))
@@ -560,6 +562,8 @@ clean:
 .PHONY: clean_all
 clean_all:
 	#rm -rf $(ARM_GCC_TOOLCHAIN)
+	# Lup Yuen: Remove all cross-compiled binaries.
+	rm -r ~/.xargo/lib/rustlib
 	rm -rf $(TARGET)
 	rm -f $(SRC_O) $(DRAM_O)
 	rm -f $(patsubst %.o,%.d,$(SRC_O)) $(patsubst %.o,%.d,$(DRAM_O))

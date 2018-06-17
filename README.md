@@ -16,6 +16,7 @@ debug.sh
 ### Select openocd instead of jlink as JTAG tool
 
 ```
+sudo apt install gdb-multiarch
 make setup GDB_SERVER=openocd
 ```
 
@@ -34,6 +35,7 @@ make debug
 ### Write Flash Memory (using rtl8710.ocd)
 
 ```
+sudo apt install openocd
 openocd -f interface/jlink.cfg -f rtl8710.ocd \
         -c "init" \
         -c "reset halt" \
@@ -47,7 +49,6 @@ openocd -f interface/jlink.cfg -f rtl8710.ocd \
 
 ```
 sudo apt install openocd
-
 openocd -f interface/jlink.cfg -f rtl8710.ocd \
         -c "init" \
         -c "reset halt" \
@@ -55,7 +56,6 @@ openocd -f interface/jlink.cfg -f rtl8710.ocd \
         -c "rtl8710_flash_read dump.bin 0 1048576" \
         -c "shutdown"
 ```
-
 ### References
 
 https://bitbucket.org/rebane/rtl8710_openocd/src
