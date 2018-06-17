@@ -69,7 +69,42 @@ make setup GDB_SERVER=openocd
 
 ## Connect PADI and SWD Debugger to computer
 
-TODO
+1. Connect the PADI to your computer via the PADI SWD Debugger USB adapter according to <br>
+http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram.pdf
+
+
+    <table>
+        <thead>
+            <td>
+                PADI IoT Stamp
+            </td>
+            <td>
+                PADI SWD Debugger
+            </td>
+        </thead>
+        <tbody>
+            <tr>
+                <td> VDD33 [Red] </td>
+                <td> VCC (SWD Pin 1) </td>
+            </tr>
+            <tr>
+                <td> GE3 [Green] </td>
+                <td> SWDIO (SWD Pin 7) </td>
+            </tr>
+            <tr>
+                <td> GE4 [Blue] </td>
+                <td> SWCLK (SWD Pin 9) </td>
+            </tr>
+            <tr>
+                <td> GND [Black] </td>
+                <td> GND (SWD Pin 4) </td>
+            </tr>
+        </tbody>
+    </table>
+
+1. Although the document states that an external power supply is needed, from experience
+    this is not necessary. The USB port of the computer should provide sufficient power
+    to the VDD33 / VCC pins.
 
 ## Redirect SWD Debugger port from Windows to VirtualBox
 
@@ -79,55 +114,196 @@ TODO
 
 ### Build flash image from console
 
-```bash
-make
-```
+1. At the Ubuntu console, run:
+
+    ```bash
+    make
+    ```
+1. Check for errors in the build. When the build is complete, you should see:
+
+    ```text
+    ===========================================================
+    Image manipulating
+    ===========================================================
+    ...
+    size = 286640
+    checksum 1bbbe7d
+    ...
+    make[1]: Leaving directory '/home/user/rustl8710'
+    ```
 
 ### Start OpenOCD from console before flashing and debugging
 
-1. Run this command in a new window before writing the flash image or debugging:
+1. Run this command in a new Ubuntu window before writing the flash image or debugging:
 
     ```bash
     ./start_openocd.sh
     ```
 
-1. Keep it running while flashing or debugging.
+1. Keep it running while flashing or debugging. When OpenOCD has been started, you should see:
+
+    ```text
+    Open On-Chip Debugger 0.10.0
+    ...
+    adapter speed: 4000 kHz
+    adapter_nsrst_delay: 100
+    cortex_m reset_config sysresetreq
+    rtl8710_reboot
+    Info : No device selected, using first device.
+    Info : J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+    Info : Hardware version: 7.00
+    Info : VTarget = 3.300 V
+    Info : clock speed 4000 kHz
+    Info : SWD DPIDR 0x2ba01477
+    Info : rtl8710.cpu: hardware has 6 breakpoints, 4 watchpoints
+    ```
 
 ### Write flash image from console (using Realtek SDK)
 
-```bash
-make flash
-```
+1. At the Ubuntu console, run:
+
+    ```bash
+    make flash
+    ```
+
+1. Check for errors in the log.  When the flashing is complete, you should see:
+
+    ```text
+    dump for check
+    start addr of dumping$327 = 0x98000000
+    end addr of dumping$328 = 0x98050fb0
+    Breakpoint 3: file rtl_flash_download.c, line 556.
+    Breakpoint 3, RtlFlashProgram () at rtl_flash_download.c:556
+    556     in rtl_flash_download.c
+    make[1]: Leaving directory '/home/user/rustl8710'
+    ```
 
 ### Debug flash code from console
 
-```bash
-make debug
-```
+1. At the Ubuntu console, run:
 
-Common GDB commands:
+    ```bash
+    make debug
+    ```
 
-- `step`: Execute the current source line, step into functions if present.
+2. Common GDB commands:
 
-- `next`: Execute the current source line, don't step into functions.
+    - `step`: Execute the current source line, step into functions if present.
+        Same as the `step into` command in Visual Studio Code.
 
-- `where`: Show stack trace.
+    - `next`: Execute the current source line, don't step into functions.
+        Same as the `step over` command in Visual Studio Code.
 
-- `where full`: Show stack trace with local variables.
+    - `where`: Show stack trace.
 
-- More commands: https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
+    - `where full`: Show stack trace with local variables.
+
+    - More commands: https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
+
+3. You may ignore the following messages in the `start_openocd` console:
+
+    ```text
+    Info : accepting 'gdb' connection on tcp/3333
+    undefined debug reason 7 - target needs reset
+    Info : SWD DPIDR 0x2ba01477
+    Error: Failed to read memory at 0xfffff000
+    ...
+    target halted due to debug-request, current mode: Thread
+    xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+    Warn : Receiving data from device timed out, retrying.
+    Info : dropped 'gdb' connection
+    ```
 
 ### Run flash code from console
 
-TODO: Connect PADI and Serial Console to computer
+1. Set the Voltage jumper of PADI Serial Console USB adapter to 3V3
 
-TODO: Run cutecom or putty
+1. Connect the PADI to your computer via the PADI Serial Console USB adapter according to Page 2 of <br>
+http://files.pine64.org/doc/PADI/quick-start-guide/padi-iot-stamp-qsg.pdf
 
-```bash
-sudo cutecom
+
+    <table>
+        <thead>
+            <td>
+                PADI Serial Console
+            </td>
+            <td>
+                PADI IoT Stamp
+            </td>
+        </thead>
+        <tbody>
+            <tr>
+                <td> GND [Black] </td>
+                <td> GND </td>
+            </tr>
+            <tr>
+                <td> 3V3 [Red] </td>
+                <td> VDD </td>
+            </tr>
+            <tr>
+                <td> RxD [Brown] </td>
+                <td> GA4 (UART2_OUT) </td>
+            </tr>
+            <tr>
+                <td> TxD [White] </td>
+                <td> GA0 (UART2_IN) </td>
+            </tr>
+        </tbody>
+    </table>
+
+1. Connect PADI Serial Console to the USB port of your computer to power up the PADI IoT Stamp
+
+1. For Windows: Install and run `putty` from <br>
+    https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html <br>
+    Look for the COM port of the PADI in Device Manager, descibed in Page 4 of <br>
+    http://files.pine64.org/doc/PADI/quick-start-guide/padi-iot-stamp-qsg.pdf <br>
+    It should look like `COM4`, `COM5`, ...
+
+1. For Ubuntu: Run `cutecom`:
+
+    ```bash
+    sudo cutecom
+    ```
+
+1. In `putty` or `cutecom`, connect to the Windows COM port or Ubuntu serial port (e.g.         `/dev/ttyUSB0`, `/dev/ttyUSB1`) with these settings:
+
+    - Speed: 38400
+    - Data Bits: 8
+    - Parity: None
+    - Stop Bits: 1
+
+1. You are now connected to the UART Serial Console for the PADI. Press a few keys like `a b c 1 2 3` and you'll see that the PADI responds with:
+
+```text
+Received: a
+Received: b
+Received: c
+Received: 1
+Received: 2
+Received: 3
 ```
 
-Device: `/dev/ttyUSB0` or `/dev/ttyUSB1`
+### Inspecting the sample flash code
+
+The sample source code is located here: <br>
+https://github.com/lupyuen/rustl8710/blob/master/src/rust/src/lib.rs
+
+```rust
+pub extern fn main_entry() {
+    let mut s = Serial::new();
+    s.tx_string("Hello from Rust!\n");
+    loop {
+        let data = s.rx_i32();
+        s.tx_string("Received: ");
+        s.tx_i32(data);
+        s.tx_string("\n");
+    }
+}
+```
+
+The Rust program reads one character at a time from the UART Serial Console.
+For every character received, the program prints the character preceded by `Received:`.
+The message `Hello from Rust!` appears as soon as the PADI powers on. Since the serial console is not connected to `putty` or `cutecom` during power on, we can't see the first message.
 
 ## Flashing and debugging the PADI from Visual Studio Code
 
@@ -172,7 +348,7 @@ Install the following Visual Studio Code extensions:
 1. Tcl (sleutho)<br>
     https://marketplace.visualstudio.com/items?itemName=sleutho.tcl
 
-### Build flash image in Visual Studio Code
+### Build flash image from Visual Studio Code
 
 1. Click `Tasks` → `Run Build Task`
 
@@ -190,7 +366,7 @@ Install the following Visual Studio Code extensions:
     Terminal will be reused by tasks, press any key to close it.
     ```
 
-### Start OpenOCD in Visual Studio Code before flashing and debugging
+### Start OpenOCD from Visual Studio Code before flashing and debugging
 
 1. Before flashing or debugging, start OpenOCD in the background:
 
@@ -199,7 +375,7 @@ Install the following Visual Studio Code extensions:
 1. Keep it running while flashing or debugging in Visual Studio Code.
     Check for errors in the `Start OpenOCD` terminal window. When OpenOCD has been started, you should see:
 
-    ```
+    ```text
     Open On-Chip Debugger 0.10.0
     ...
     adapter speed: 4000 kHz
@@ -215,7 +391,7 @@ Install the following Visual Studio Code extensions:
     Info : rtl8710.cpu: hardware has 6 breakpoints, 4 watchpoints
     ```
 
-### Write flash image in Visual Studio Code
+### Write flash image from Visual Studio Code
 
 1. Check that OpenOCD has been started.
 
@@ -234,7 +410,7 @@ Install the following Visual Studio Code extensions:
     Terminal will be reused by tasks, press any key to close it.
     ```
 
-### Debug flash code in Visual Studio Code
+### Debug flash code from Visual Studio Code
 
 1. Check that OpenOCD has been started.
 
@@ -254,7 +430,7 @@ Install the following Visual Studio Code extensions:
     Info : dropped 'gdb' connection
     ```
 
-### Run flash code in Visual Studio Code
+### Run flash code from Visual Studio Code
 
 Use the same instructions as _"Run Flash Code From Console"_ above.
 
