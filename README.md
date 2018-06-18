@@ -115,11 +115,11 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
 
 1. If you're using VirtualBox on Windows, you should configure VirtualBox to allow the Ubuntu Virtual Machine to access the USB port used by the PADI SWD Debugger. Here's how...
 
-1. In the Virtual Machine window, click `Devices -> USB -> USB Settings`. Add a USB Device Filter for `SEGGER J-Link [0100]`. This ensures that the SWD Debugger is always accessible to the Ubuntu Virtual Machine whenever the SWD Debugger is connected to the computer.
+1. In the Virtual Machine window, click `Devices → USB → USB Settings`. Add a USB Device Filter for `SEGGER J-Link [0100]`. This ensures that the SWD Debugger is always accessible to the Ubuntu Virtual Machine whenever the SWD Debugger is connected to the computer.
 
     ![Add a USB Device Filter](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usb1.png)
 
-1. Alternatively, click `Devices -> USB -> SEGGER J-Link [0100]` so that it shows a tick. This allows the Ubuntu Virtual Machine to access the SWD Debugger temporarily while the SWD Debugger is connected to the computer.
+1. Alternatively, click `Devices → USB → SEGGER J-Link [0100]` so that it shows a tick. This allows the Ubuntu Virtual Machine to access the SWD Debugger temporarily while the SWD Debugger is connected to the computer.
 
     ![Allow access to USB Device](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usb2.png)
 
@@ -447,12 +447,12 @@ Install the following Visual Studio Code extensions:
 
     ![Visual Studio Code debugger toolbar](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/debug.png)
 
-    - Run
+    - Contunue
     - Step Over
     - Step Into
     - Step Out
-    - ???
-    - ???
+    - Step Back
+    - Reverse
     - Restart
     - Stop
 
