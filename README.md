@@ -23,15 +23,17 @@ Tested on:
 -----
 ## Hardware components
 
+You will need the following development hardware (US$ 14):
+
 - PADI IoT Stamp with Assembled PADI Breadboard Adapter
 
     https://www.pine64.org/?product=assembled-padi-breadboard-adapter
 
-- PADI SWD Debugger
+- PADI SWD Debugger: For flashing and debugging the PADI
 
     https://www.pine64.org/?product=swd-debugger
 
-- PADI Serial Console
+- PADI Serial Console:  For interacting with the PADI serial console input / output
 
     https://www.pine64.org/?product=padi-serial-console
 
@@ -59,9 +61,9 @@ git clone https://github.com/lupyuen/rustl8710
 
 ## Install Rust components
 
-1. Install `rustup` from https://rustup.rs/
+1. On Ubuntu, install `rustup` from https://rustup.rs/
 
-1. Run the following commands:
+1. Run the following commands on Ubuntu:
 
     ```bash
     cd rustl8710
@@ -282,7 +284,7 @@ http://files.pine64.org/doc/PADI/quick-start-guide/padi-iot-stamp-qsg.pdf
     http://files.pine64.org/doc/PADI/quick-start-guide/padi-iot-stamp-qsg.pdf <br>
     It should look like `COM4`, `COM5`, ...
 
-1. For Ubuntu: Run `cutecom`:
+1. For Ubuntu: Run
 
     ```bash
     sudo cutecom
