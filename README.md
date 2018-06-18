@@ -2,6 +2,7 @@
 
 Original background and usage instructions at [https://polyfractal.com/post/rustl8710/](https://polyfractal.com/post/rustl8710/)
 
+-----
 ## rustl8710 Updates
 
 - The rustl8710 code here has been updated to use OpenOCD instead of JLink as the JTAG tool for flashing and debugging, because JLink no longer works with the PADI SWD Debugger USB dongle. See https://forum.pine64.org/archive/index.php?thread-4579-2.html
@@ -16,6 +17,7 @@ Tested on:
 
 - Ubuntu 18.04 LTS x86 64-bit on Intel Atom x5-Z8300 notebook PC
 
+-----
 ## Hardware components
 
 - PADI IoT Stamp with Assembled PADI Breadboard Adapter
@@ -30,6 +32,7 @@ Tested on:
 
     https://www.pine64.org/?product=padi-serial-console
 
+-----
 ## Install prerequisites
 
 ```bash
@@ -61,12 +64,14 @@ git clone https://github.com/lupyuen/rustl8710
     cargo install xargo
     ```
 
+-----
 ## Select OpenOCD instead of JLink as JTAG tool
 
 ```bash
 make setup GDB_SERVER=openocd
 ```
 
+-----
 ## Connect PADI and SWD Debugger to computer
 
 1. Connect the PADI to your computer via the PADI SWD Debugger USB adapter according to <br>
@@ -106,10 +111,19 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
     this is not necessary. The USB port of the computer should provide sufficient power
     to the VDD33 / VCC pins.
 
-## Redirect SWD Debugger port from Windows to VirtualBox
+## For Windows: Redirect SWD Debugger port from Windows to VirtualBox
 
-TODO
+1. If you're using VirtualBox on Windows, you should configure VirtualBox to allow the Ubuntu Virtual Machine to access the USB port used by the PADI SWD Debugger. Here's how...
 
+1. In the Virtual Machine window, click `Devices -> USB -> USB Settings`. Add a USB Device Filter for `SEGGER J-Link [0100]`. This ensures that the SWD Debugger is always accessible to the Ubuntu Virtual Machine whenever the SWD Debugger is connected to the computer.
+
+    ![Add a USB Device Filter](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usb1.png)
+
+1. Alternatively, click `Devices -> USB -> SEGGER J-Link [0100]` so that it shows a tick. This allows the Ubuntu Virtual Machine to access the SWD Debugger temporarily while the SWD Debugger is connected to the computer.
+
+    ![Allow access to USB Device](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usb2.png)
+
+-----
 ## Flashing and debugging the PADI from the console
 
 ### Build flash image from console
@@ -272,16 +286,24 @@ http://files.pine64.org/doc/PADI/quick-start-guide/padi-iot-stamp-qsg.pdf
     - Parity: None
     - Stop Bits: 1
 
+    ![putty configuration](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/putty1.png)
+
+    ![cutecom configuration](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/cutecom1.png)
+
 1. You are now connected to the UART Serial Console for the PADI. Press a few keys like `a b c 1 2 3` and you'll see that the PADI responds with:
 
-```text
-Received: a
-Received: b
-Received: c
-Received: 1
-Received: 2
-Received: 3
-```
+    ```text
+    Received: a
+    Received: b
+    Received: c
+    Received: 1
+    Received: 2
+    Received: 3
+    ```
+
+    ![putty console](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/putty2.png)
+
+    ![cutecom console](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/cutecom2.png)
 
 ### Inspecting the sample flash code
 
@@ -305,6 +327,7 @@ The Rust program reads one character at a time from the UART Serial Console.
 For every character received, the program prints the character preceded by `Received:`.
 The message `Hello from Rust!` appears as soon as the PADI powers on. Since the serial console is not connected to `putty` or `cutecom` during power on, we can't see the first message.
 
+-----
 ## Flashing and debugging the PADI from Visual Studio Code
 
 Open the Visual Studio Code workspace:
@@ -347,6 +370,8 @@ Install the following Visual Studio Code extensions:
 
 1. Tcl (sleutho)<br>
     https://marketplace.visualstudio.com/items?itemName=sleutho.tcl
+
+    ![Visual Studio Code extensions to be installed](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/vscode2.png)
 
 ### Build flash image from Visual Studio Code
 
@@ -416,6 +441,21 @@ Install the following Visual Studio Code extensions:
 
 1. Click `Debug` → `Start Debugging`
 
+    ![Debugging PADI with Visual Studio Code](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/vscode1.png)
+
+1. Click the debugger toolbar at top right to debug your Rust program:
+
+    ![Visual Studio Code debugger toolbar](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/debug.png)
+
+    - Run
+    - Step Over
+    - Step Into
+    - Step Out
+    - ???
+    - ???
+    - Restart
+    - Stop
+
 1. You may ignore the following messages in the `Start OpenOCD` terminal window:
 
     ```text
@@ -434,6 +474,7 @@ Install the following Visual Studio Code extensions:
 
 Use the same instructions as _"Run Flash Code From Console"_ above.
 
+-----
 ## Other commands
 
 ### Read flash memory directly (using rtl8710.ocd)
@@ -459,6 +500,7 @@ openocd -f interface/jlink.cfg -f rtl8710.ocd \
         -c "shutdown"
 ```
 
+-----
 ## References
 
 Official PADI docs: <br>
