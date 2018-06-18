@@ -5,6 +5,9 @@ Original background and usage instructions at [https://polyfractal.com/post/rust
 -----
 ## rustl8710 Updates
 
+Updated article on rustl8710: <br>
+https://medium.com/@ly.lee/running-rust-and-freertos-on-the-padi-iot-stamp-fb36c5ef4844
+
 - The rustl8710 code here has been updated to use OpenOCD instead of JLink as the JTAG tool for flashing and debugging, because JLink no longer works with the PADI SWD Debugger USB dongle. See https://forum.pine64.org/archive/index.php?thread-4579-2.html
 
 - Replaced `gdb-arm-none-eabi` (obsolete) by `gdb-multiarch`
@@ -35,6 +38,8 @@ Tested on:
 -----
 ## Install prerequisites
 
+Run the following commands on Ubuntu:
+
 ```bash
 sudo apt update
 sudo apt install build-essential gawk bc libc6-dev:i386 lib32ncurses5-dev
@@ -45,6 +50,8 @@ sudo apt install openocd
 ```
 
 ## Download rustl8710 code
+
+Run the following command on Ubuntu:
 
 ```bash
 git clone https://github.com/lupyuen/rustl8710
@@ -66,6 +73,8 @@ git clone https://github.com/lupyuen/rustl8710
 
 -----
 ## Select OpenOCD instead of JLink as JTAG tool
+
+Run the following command on Ubuntu:
 
 ```bash
 make setup GDB_SERVER=openocd
@@ -332,10 +341,10 @@ The message `Hello from Rust!` appears as soon as the PADI powers on. Since the 
 
 Open the Visual Studio Code workspace:
 
-1. Install Video Studio Code from <br>
+1. On Ubuntu, install Video Studio Code from <br>
     https://code.visualstudio.com/download
 
-1. Launch Video Studio Code with the command:
+1. Launch Video Studio Code on Ubuntu with the command:
 
     ```bash
     code
@@ -477,6 +486,8 @@ Use the same instructions as _"Run Flash Code From Console"_ above.
 -----
 ## Other commands
 
+The following commands are useful for creating a full flash image backup (e.g. the factory-installed image) and for restoring the image.
+
 ### Read flash memory directly (using rtl8710.ocd)
 
 ```bash
@@ -517,3 +528,12 @@ https://bitbucket.org/rebane/rtl8710_openocd/src
 
 Using OpenOCD with SWD Transport: <br>
 http://openocd.org/doc-release/html/Debug-Adapter-Configuration.html#SWD-Transport
+
+Rust wrapper for FreeRTOS: <br>
+https://github.com/hashmismatch/freertos.rs
+
+Xargo cross compiler for Rust: <br>
+https://github.com/japaric/xargo
+
+Concurrency and safety in Rust: <br>
+https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html
