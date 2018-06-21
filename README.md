@@ -533,19 +533,25 @@ Install the following Visual Studio Code extensions:
 
     ![Debugging PADI with Visual Studio Code](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/vscode1.png)
 
-1. Click the debugger toolbar at top right to debug your Rust program:
+1. Click the [debugger toolbar](https://code.visualstudio.com/docs/editor/debugging) at top right to debug your Rust program:
 
     ![Visual Studio Code debugger toolbar](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/debug.png)
 
-    - Contunue
-    - Step Over
-    - Step Into
-    - Step Out
-    - Step Back
-    - Reverse
-    - Restart
-    - Stop
-
+    <table>
+        <tbody>
+            <tr>                   
+                <td> Continue </td>
+                <td> Step <br> Over </td>
+                <td> Step <br> Into </td>
+                <td> Step <br> Out </td>
+                <td> Step <br> Back </td>
+                <td> Reverse </td>
+                <td> Restart </td>
+                <td> Stop </td>
+            </tr>
+        </tbody>
+    </table> 
+    
 1. You may ignore the following messages in the `Start OpenOCD` terminal window:
 
     ```text
