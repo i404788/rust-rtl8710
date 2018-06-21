@@ -628,7 +628,6 @@ openocd -f interface/jlink.cfg -f rtl8710.ocd \
 1. The Realtek Ameba RTL8710AF SDK then builds the complete flash image by compiling all the necessary system and library files, including drivers and protocols for wifi and all other interfaces:
 
     ```bash
-    ...
     ===========================================================
     Build application
     ===========================================================
@@ -643,7 +642,21 @@ openocd -f interface/jlink.cfg -f rtl8710.ocd \
 1. The Realtek Ameba RTL8710AF SDK links the compiled files into a single image `application.axf`
 
     ```bash
-    arm-none-eabi-gcc  -mcpu=cortex-m3 -mthumb -g --specs=nano.specs -nostartfiles -Wl,-Map=application/Debug/bin/application.map -Os -Wl,--gc-sections -Wl,--cref -Wl,--entry=Reset_Handler -Wl,--no-enum-size-warning -Wl,--no-wchar-size-warning -o application/Debug/bin/application.axf  application/Debug/obj/system_8195a.o application/Debug/obj/atcmd_ethernet.o application/Debug/obj/atcmd_lwip.o application/Debug/obj/atcmd_sys.o application/Debug/obj/atcmd_wifi.o ... application/Debug/rust_obj/librustl8710.o application/Debug/rust_obj/libfreertos_rs.o application/Debug/rust_obj/libcore.o application/Debug/rust_obj/liballoc.o application/Debug/rust_obj/libcompiler_builtins.o application/Debug/obj/ram_1.r.o 
+    arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -g ...
+        -o application/Debug/bin/application.axf  
+        application/Debug/obj/system_8195a.o 
+        application/Debug/obj/atcmd_ethernet.o 
+        application/Debug/obj/atcmd_lwip.o 
+        application/Debug/obj/atcmd_sys.o
+        application/Debug/obj/atcmd_wifi.o 
+        ... 
+        application/Debug/rust_obj/librustl8710.o 
+        application/Debug/rust_obj/libfreertos_rs.o 
+        application/Debug/rust_obj/libcore.o 
+        application/Debug/rust_obj/liballoc.o 
+        application/Debug/rust_obj/libcompiler_builtins.o 
+        application/Debug/obj/ram_1.r.o
+        ...
     ```
     
 1. The SDK generates the flash image `ram_all.bin` by manipulating `application.axf`:
