@@ -97,6 +97,8 @@ You will need the following development hardware (US$ 14):
     cargo install xargo
     ```
 
+1. This installs the Rust compiler and libraries, as well as Xargo the Rust cross-compiler. The nightly Rust library build is selected (instead of the stable or beta builds) because Xargo requires it.
+
 -----
 ## Select OpenOCD instead of JLink as JTAG tool
 
