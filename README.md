@@ -12,6 +12,8 @@ https://medium.com/@ly.lee/running-rust-and-freertos-on-the-padi-iot-stamp-fb36c
 
 - Replaced `gdb-arm-none-eabi` (obsolete) by `gdb-multiarch`
 
+- Upgraded freertos.rs from version 1.0 to 2.0
+
 - Build, flash and debug PADI from Visual Studio Code
 
 Tested on:
