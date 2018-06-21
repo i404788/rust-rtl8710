@@ -275,6 +275,26 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
     (gdb) 
     ```
 
+1. The GDB Debugger has now paused the execution of the PADI at the `main()` function in `main.c`, the point just before our Rust code begins.  Enter the `step` command to continue to the first line of our Rust code:
+
+    ```text
+    (gdb) step
+    main_entry () at src/lib.rs:23
+    23      pub extern fn main_entry() {
+    (gdb)
+    ```
+
+1. To step through each line of the Rust code, keep entering the `step` command:
+
+    ```text
+    (gdb) step
+    24          let mut s = Serial::new();
+    (gdb) step
+    rustl8710::serial::Serial::new () at src/serial.rs:12
+    12                  pipe: serial_t::default()
+    (gdb)
+    ```
+
 1. Common GDB commands:
 
     - `step`: Execute the current source line, step into functions if present.
