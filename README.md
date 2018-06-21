@@ -218,6 +218,9 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
     Info : rtl8710.cpu: hardware has 6 breakpoints, 4 watchpoints
     ```
     
+1. A sample OpenOCD log may be found here: <br>
+    https://github.com/lupyuen/rustl8710/blob/master/log/start_openocd.log
+    
 1. If the SWD Debugger is not detected by Ubuntu, install "J-Link Software and Documentation pack for Linux, DEB installer, 64-bit" from
 
     https://www.segger.com/downloads/jlink#J-LinkSoftwareAndDocumentationPack
@@ -241,6 +244,9 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
     556     in rtl_flash_download.c
     make[1]: Leaving directory '/home/user/rustl8710'
     ```
+
+1. A sample flash log may be found here: <br>
+    https://github.com/lupyuen/rustl8710/blob/master/log/flash.log
 
 ### Debug flash code from console
 
