@@ -383,9 +383,9 @@ http://files.pine64.org/doc/PADI/quick-start-guide/padi-iot-stamp-qsg.pdf
     - Parity: None
     - Stop Bits: 1
 
-    ![putty configuration](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/putty1.png)
+    <img alt="putty configuration" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/putty1.png">
 
-    ![cutecom configuration](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/cutecom1.png)
+    <img width="600" alt="cutecom configuration" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/cutecom1.png">
 
 1. You are now connected to the UART Serial Console for the PADI. Press a few keys like `a b c 1 2 3` and you'll see that the PADI responds with:
 
@@ -398,9 +398,9 @@ http://files.pine64.org/doc/PADI/quick-start-guide/padi-iot-stamp-qsg.pdf
     Received: 3
     ```
 
-    ![putty console](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/putty2.png)
+    <img alt="putty console" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/putty2.png">
 
-    ![cutecom console](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/cutecom2.png)
+    <img width="500" alt="cutecom console" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/cutecom2.png">
 
 ### Inspecting the sample flash code
 
@@ -552,7 +552,7 @@ Install the following Visual Studio Code extensions:
 
     ![Debugging PADI with Visual Studio Code](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/vscode1.png)
 
-1. Click the [debugger toolbar](https://code.visualstudio.com/docs/editor/debugging) at top right to debug your Rust program:  
+1. You may click the [debugger toolbar](https://code.visualstudio.com/docs/editor/debugging) at top right to debug your Rust program:  
 
     <table>
         <thead>
@@ -575,7 +575,13 @@ Install the following Visual Studio Code extensions:
             </tr>
         </tbody>
     </table> 
-    
+
+1. The debugger has now paused the execution of the PADI at the main() function in main.c, the point just before our Rust code begins: 
+
+1. Click the `Step Into` button to continue to the first line of our Rust code:
+
+1. To step through each line of the Rust code, keep clicking the `Step Into` button:
+
 1. You may ignore the following messages in the `Start OpenOCD` terminal window:
 
     ```text
