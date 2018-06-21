@@ -577,9 +577,15 @@ Install the following Visual Studio Code extensions:
 
 1. The debugger has now paused the execution of the PADI at the main() function in main.c, the point just before our Rust code begins: 
 
+    ![main() function in main.c](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/debugstep1.png)
+
 1. Click the `Step Into` button to continue to the first line of our Rust code:
 
+    ![First line of Rust code](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/debugstep2.png)
+
 1. To step through each line of the Rust code, keep clicking the `Step Into` button:
+
+    ![Second line of Rust code](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/debugstep3.png)
 
 1. You may ignore the following messages in the `Start OpenOCD` terminal window:
 
