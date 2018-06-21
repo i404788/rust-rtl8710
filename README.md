@@ -1,4 +1,4 @@
-# rustl8710 - Rust on PADI Realtek RTL8710
+# rustl8710 - Rust and FreeRTOS on PADI Realtek RTL8710, updated for Visual Studio Code, OpenOCD, gdb-multiarch
 
 Original background and usage instructions at [https://polyfractal.com/post/rustl8710/](https://polyfractal.com/post/rustl8710/)
 
@@ -40,16 +40,25 @@ You will need the following development hardware (US$ 14):
 -----
 ## Install prerequisites
 
-Run the following commands on Ubuntu:
+1. We assume that you are running Ubuntu 18.04 LTS x86 64-bit on a PC or on Oracle VirtualBox.
 
-```bash
-sudo apt update
-sudo apt install build-essential gawk bc libc6-dev:i386 lib32ncurses5-dev
-sudo apt install gcc-arm-none-eabi
-sudo apt install gdb-multiarch
-sudo apt install cutecom
-sudo apt install openocd
-```
+1. Run the following commands on Ubuntu:
+
+    ```bash
+    sudo apt update
+    sudo apt install build-essential gawk bc libc6-dev:i386 lib32ncurses5-dev
+    sudo apt install gcc-arm-none-eabi
+    sudo apt install gdb-multiarch
+    sudo apt install cutecom
+    sudo apt install openocd
+    ```
+1. `gcc-arm-none-eabi` is GNU C ARM32 cross-compiler that we shall use to generate code for the ARM 32-bit architecture (used by PADI)
+
+1. `gdb-multiarch` is the GNU cross-platform debugger that we shall use to debug the Rust and C code running on the PADI
+
+1. `cutecom` is a simple terminal emulator that connects to the PADI serial interface for console input/output
+
+1. `openocd` is the Open On-Chip Debugger that connects to the PADI SWD Debugger for flashing and debugging
 
 ## Download rustl8710 code
 
