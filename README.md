@@ -48,8 +48,7 @@ You will need the following development hardware (US$ 14):
     https://drive.google.com/drive/folders/1Isf0lAj6otziOXYjjSrfwCW06rQEwzaG?usp=sharing
     
     In VirtualBox, click `File → Import Appliance` and select the downloaded file `padi.ova`. <br>
-    Start the `padi` virtual machine and connect with `ssh` to `padi.local`, username `user`, password `password`. <br>
-    Skip to the section _"Connect PADI and SWD Debugger to computer"_ below.
+    Start the `padi` virtual machine and connect with `ssh` to `padi.local`, username `user`, password `password`.
 
 1. Run the following commands on Ubuntu:
 
