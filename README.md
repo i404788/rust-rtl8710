@@ -533,11 +533,16 @@ Install the following Visual Studio Code extensions:
 
     ![Debugging PADI with Visual Studio Code](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/vscode1.png)
 
-1. Click the [debugger toolbar](https://code.visualstudio.com/docs/editor/debugging) at top right to debug your Rust program:
-
-    ![Visual Studio Code debugger toolbar](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/debug.png)
+1. Click the [debugger toolbar](https://code.visualstudio.com/docs/editor/debugging) at top right to debug your Rust program:  
 
     <table>
+        <thead>
+            <tr>
+                <td colspan="8">
+                    <img src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/debug.png">
+                </td>
+            </tr>
+        <thead>    
         <tbody>
             <tr>                   
                 <td> Continue </td>
