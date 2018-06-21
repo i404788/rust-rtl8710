@@ -221,8 +221,7 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
 1. A sample OpenOCD log may be found here: <br>
     https://github.com/lupyuen/rustl8710/blob/master/log/start_openocd.log
     
-1. If the SWD Debugger is not detected by Ubuntu, install "J-Link Software and Documentation pack for Linux, DEB installer, 64-bit" from
-
+1. If the SWD Debugger is not detected by Ubuntu, install "J-Link Software and Documentation pack for Linux, DEB installer, 64-bit" from <br>
     https://www.segger.com/downloads/jlink#J-LinkSoftwareAndDocumentationPack
 
 ### Write flash image from console (using Realtek SDK)
@@ -256,7 +255,17 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
     make debug
     ```
 
-2. Common GDB commands:
+1. Wait for the GDB prompt before entering debug commands:
+
+    ```text
+    target halted due to debug-request, current mode: Thread
+    xPSR: 0x01000000 pc: 0x00000100 msp: 0x1ffffffc
+    Breakpoint 1, main () at src/c/src/main.c:16
+    16          main_entry();
+    (gdb) 
+    ```
+
+1. Common GDB commands:
 
     - `step`: Execute the current source line, step into functions if present.
         Same as the `step into` command in Visual Studio Code.
@@ -270,7 +279,10 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
 
     - More commands: https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
 
-3. You may ignore the following messages in the `start_openocd` console:
+1. A sample debug log may be found here: <br>
+    https://github.com/lupyuen/rustl8710/blob/master/log/debug.log
+    
+1. You may ignore the following messages in the `start_openocd` console:
 
     ```text
     Info : accepting 'gdb' connection on tcp/3333
@@ -447,6 +459,9 @@ Install the following Visual Studio Code extensions:
     Terminal will be reused by tasks, press any key to close it.
     ```
 
+1. A sample build log may be found here: <br>
+    https://raw.githubusercontent.com/lupyuen/rustl8710/master/log/make.log
+    
 ### Start OpenOCD from Visual Studio Code before flashing and debugging
 
 1. Before flashing or debugging, start OpenOCD in the background:
@@ -471,6 +486,12 @@ Install the following Visual Studio Code extensions:
     Info : SWD DPIDR 0x2ba01477
     Info : rtl8710.cpu: hardware has 6 breakpoints, 4 watchpoints
     ```
+    
+1. A sample OpenOCD log may be found here: <br>
+    https://github.com/lupyuen/rustl8710/blob/master/log/start_openocd.log
+    
+1. If the SWD Debugger is not detected by Ubuntu, install "J-Link Software and Documentation pack for Linux, DEB installer, 64-bit" from <br>
+    https://www.segger.com/downloads/jlink#J-LinkSoftwareAndDocumentationPack
 
 ### Write flash image from Visual Studio Code
 
@@ -490,6 +511,9 @@ Install the following Visual Studio Code extensions:
     make[1]: Leaving directory '/home/user/rustl8710'
     Terminal will be reused by tasks, press any key to close it.
     ```
+
+1. A sample flash log may be found here: <br>
+    https://github.com/lupyuen/rustl8710/blob/master/log/flash.log
 
 ### Debug flash code from Visual Studio Code
 
