@@ -44,6 +44,13 @@ You will need the following development hardware (US$ 14):
 
 1. We assume that you are running Ubuntu 18.04 LTS x86 64-bit on a PC or on Oracle VirtualBox.
 
+1. If you're using Oracle VirtualBox, you may download the preinstalled Ubuntu image from <br>
+    https://drive.google.com/drive/folders/1Isf0lAj6otziOXYjjSrfwCW06rQEwzaG?usp=sharing
+    
+    In VirtualBox, click `File → Import Appliance` and select the downloaded file `padi.ova`. <br>
+    Start the `padi` virtual machine and connect with `ssh` to `padi.local`, username `user`, password `password`. <br>
+    Skip to the section _"Connect PADI and SWD Debugger to computer"_ below.
+
 1. Run the following commands on Ubuntu:
 
     ```bash
@@ -54,6 +61,7 @@ You will need the following development hardware (US$ 14):
     sudo apt install cutecom
     sudo apt install openocd
     ```
+    
 1. `gcc-arm-none-eabi` is GNU C ARM32 cross-compiler that we shall use to generate code for the ARM 32-bit architecture (used by PADI)
 
 1. `gdb-multiarch` is the GNU cross-platform debugger that we shall use to debug the Rust and C code running on the PADI
@@ -557,6 +565,34 @@ Install the following Visual Studio Code extensions:
 Use the same instructions as _"Run Flash Code From Console"_ above.
 
 -----
+## Other commands
+
+The following commands are useful for creating a full flash image backup (e.g. the factory-installed image) and for restoring the image.
+
+### Read flash memory directly (using rtl8710.ocd)
+
+```bash
+openocd -f interface/jlink.cfg -f rtl8710.ocd \
+        -c "init" \
+        -c "reset halt" \
+        -c "rtl8710_flash_read_id" \
+        -c "rtl8710_flash_read dump.bin 0 1048576" \
+        -c "shutdown"
+```
+
+### Write flash memory image directly (using rtl8710.ocd)
+
+```bash
+openocd -f interface/jlink.cfg -f rtl8710.ocd \
+        -c "init" \
+        -c "reset halt" \
+        -c "rtl8710_flash_auto_erase 1" \
+        -c "rtl8710_flash_auto_verify 1" \
+        -c "rtl8710_flash_write dump.bin 0" \
+        -c "shutdown"
+```
+
+-----
 ## How the build is done
 
 1. A sample build log may be found here: <br>
@@ -608,9 +644,7 @@ Use the same instructions as _"Run Flash Code From Console"_ above.
     arm-none-eabi-nm application/Debug/bin/application.axf | sort > application/Debug/bin/application.nmap
     arm-none-eabi-objcopy -j .image2.start.table -j .ram_image2.text -j .ram_image2.rodata -j .ram.data -Obinary application/Debug/bin/application.axf application/Debug/bin/ram_2.bin
     arm-none-eabi-objcopy -j .sdr_text -j .sdr_rodata -j .sdr_data -Obinary application/Debug/bin/application.axf application/Debug/bin/sdram.bin
-    cp component/soc/realtek/8195a/misc/bsp/image/ram_1.p.bin application/Debug/bin/ram_1.p.bin
-    chmod 777 application/Debug/bin/ram_1.p.bin
-    chmod +rx component/soc/realtek/8195a/misc/iar_utility/common/tools/pick component/soc/realtek/8195a/misc/iar_utility/common/tools/checksum component/soc/realtek/8195a/misc/iar_utility/common/tools/padding
+    ...
     component/soc/realtek/8195a/misc/iar_utility/common/tools/pick 0x`grep __ram_image2_text_start__ application/Debug/bin/application.nmap | gawk '{print $1}'` 0x`grep __ram_image2_text_end__ application/Debug/bin/application.nmap | gawk '{print $1}'` application/Debug/bin/ram_2.bin application/Debug/bin/ram_2.p.bin body+reset_offset+sig
     b:268460032 s:268460032 e:268746656
     size 286624
@@ -628,44 +662,14 @@ Use the same instructions as _"Run Flash Code From Console"_ above.
     Original size 15032
     Padding  size 45056
     cat application/Debug/bin/ram_1.p.bin > application/Debug/bin/ram_all.bin
-    chmod 777 application/Debug/bin/ram_all.bin
     cat application/Debug/bin/ram_2.p.bin >> application/Debug/bin/ram_all.bin
     if [ -s application/Debug/bin/sdram.bin ]; then cat application/Debug/bin/ram_3.p.bin >> application/Debug/bin/ram_all.bin; fi
     cat application/Debug/bin/ram_2.ns.bin > application/Debug/bin/ota.bin
-    chmod 777 application/Debug/bin/ota.bin
     if [ -s application/Debug/bin/sdram.bin ]; then cat application/Debug/bin/ram_3.p.bin >> application/Debug/bin/ota.bin; fi
     component/soc/realtek/8195a/misc/iar_utility/common/tools/checksum application/Debug/bin/ota.bin || true
     size = 286640 
     checksum 1bbbe85
     ```
-
------
-## Other commands
-
-The following commands are useful for creating a full flash image backup (e.g. the factory-installed image) and for restoring the image.
-
-### Read flash memory directly (using rtl8710.ocd)
-
-```bash
-openocd -f interface/jlink.cfg -f rtl8710.ocd \
-        -c "init" \
-        -c "reset halt" \
-        -c "rtl8710_flash_read_id" \
-        -c "rtl8710_flash_read dump.bin 0 1048576" \
-        -c "shutdown"
-```
-
-### Write flash memory image directly (using rtl8710.ocd)
-
-```bash
-openocd -f interface/jlink.cfg -f rtl8710.ocd \
-        -c "init" \
-        -c "reset halt" \
-        -c "rtl8710_flash_auto_erase 1" \
-        -c "rtl8710_flash_auto_verify 1" \
-        -c "rtl8710_flash_write dump.bin 0" \
-        -c "shutdown"
-```
 
 -----
 ## References
