@@ -62,11 +62,26 @@ You will need the following development hardware (US$ 14):
 
 ## Download rustl8710 code
 
-Run the following command on Ubuntu:
+1. Run the following command on Ubuntu:
 
-```bash
-git clone https://github.com/lupyuen/rustl8710
-```
+    ```bash
+    git clone https://github.com/lupyuen/rustl8710
+    ```
+
+1. The following software modules are included:
+
+    - Realtek Ameba RTL8710AF SDK (from the official PADI downloads) <br>
+    https://github.com/lupyuen/rustl8710/tree/master/component <br>
+    https://github.com/lupyuen/rustl8710/tree/master/src/c
+    
+    - FreeRTOS (included in the Realtek Ameba RTL8710AF SDK) <br>
+    https://github.com/lupyuen/rustl8710/tree/master/component/os/freertos
+    
+    - Rust system and sample code <br>
+    https://github.com/lupyuen/rustl8710/tree/master/src/rust
+    
+    - freertos.rs: Rust wrapper for FreeRTOS <br>
+    https://github.com/lupyuen/rustl8710/blob/master/src/rust/Cargo.toml
 
 ## Install Rust components
 
@@ -528,7 +543,7 @@ openocd -f interface/jlink.cfg -f rtl8710.ocd \
 -----
 ## References
 
-Official PADI docs: <br>
+Official PADI docs and downloads: <br>
 https://www.pine64.org/?page_id=946
 
 Original rustl8710 article: <br>
