@@ -70,7 +70,7 @@ You will need the following development hardware (US$ 14):
 
 1. The following software modules are included:
 
-    - Realtek Ameba RTL8710AF SDK (from the official PADI downloads) <br>
+    - Realtek Ameba RTL8710AF SDK (from the official PADI downloads): Provides the tools to build, flash and debug PADI programs written in C <br>
     https://github.com/lupyuen/rustl8710/tree/master/component <br>
     https://github.com/lupyuen/rustl8710/tree/master/src/c
     
@@ -82,6 +82,9 @@ You will need the following development hardware (US$ 14):
     
     - freertos.rs: Rust wrapper for FreeRTOS <br>
     https://github.com/lupyuen/rustl8710/blob/master/src/rust/Cargo.toml
+
+1. The `log` folder contains sample build, flash and debug logs, for your troubleshooting convenience <br>
+    https://github.com/lupyuen/rustl8710/tree/master/log
 
 ## Install Rust components
 
@@ -102,11 +105,13 @@ You will need the following development hardware (US$ 14):
 -----
 ## Select OpenOCD instead of JLink as JTAG tool
 
-Run the following command on Ubuntu:
+1.  Run the following command on Ubuntu:
 
-```bash
-make setup GDB_SERVER=openocd
-```
+    ```bash
+    make setup GDB_SERVER=openocd
+    ```
+
+1. This tells the Realtek Ameba RTL8710AF SDK to use OpenOCD (instead of JLink) to connect to the PADI SWD Debugger during flash and debug operations
 
 -----
 ## Connect PADI and SWD Debugger to computer
@@ -170,6 +175,7 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
     ```bash
     make
     ```
+
 1. Check for errors in the build. When the build is complete, you should see:
 
     ```text
@@ -182,6 +188,9 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
     ...
     make[1]: Leaving directory '/home/user/rustl8710'
     ```
+
+1. A sample build log may be found here: <br>
+    https://raw.githubusercontent.com/lupyuen/rustl8710/master/log/make.log
 
 ### Start OpenOCD from console before flashing and debugging
 
@@ -208,6 +217,7 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
     Info : SWD DPIDR 0x2ba01477
     Info : rtl8710.cpu: hardware has 6 breakpoints, 4 watchpoints
     ```
+    
 1. If the SWD Debugger is not detected by Ubuntu, install "J-Link Software and Documentation pack for Linux, DEB installer, 64-bit" from
 
     https://www.segger.com/downloads/jlink#J-LinkSoftwareAndDocumentationPack
@@ -513,6 +523,40 @@ Install the following Visual Studio Code extensions:
 ### Run flash code from Visual Studio Code
 
 Use the same instructions as _"Run Flash Code From Console"_ above.
+
+-----
+## How the build is done
+
+1. A sample build log may be found here: <br>
+    https://raw.githubusercontent.com/lupyuen/rustl8710/master/log/make.log
+
+1. The build begins with Xargo compiling the Rust programs and libraries for the PADI. `thumbv7m-none-eabi` targets the ARM Cortex M3 platform used by PADI.
+
+    ```bash
+    ...
+    cd src/rust && xargo build --target thumbv7m-none-eabi -v
+    ...
+    cp src/rust/target/thumbv7m-none-eabi/debug/librustl8710.rlib application/Debug/rust_obj/librustl8710.o
+    cp src/rust/target/thumbv7m-none-eabi/debug/deps/libfreertos_rs*.rlib application/Debug/rust_obj/libfreertos_rs.o
+    cp ~/.xargo/lib/rustlib/thumbv7m-none-eabi/lib/libcore*.rlib application/Debug/rust_obj/libcore.o
+    cp ~/.xargo/lib/rustlib/thumbv7m-none-eabi/lib/liballoc*.rlib application/Debug/rust_obj/liballoc.o
+    cp ~/.xargo/lib/rustlib/thumbv7m-none-eabi/lib/libcompiler_builtins*.rlib application/Debug/rust_obj/libcompiler_builtins.o
+    ```
+    
+1. TODO: Xargo is no longer needed for compiling `thumbv7m-none-eabi` programs: <br>
+    https://users.rust-lang.org/t/psa-you-no-longer-need-xargo-to-do-arm-cortex-m-development/16703
+
+1. The Realtek Ameba RTL8710AF SDK then builds the complete flash image by compiling all the necessary system and library files, including drivers for wifi and all other interfaces:
+
+    ```bash
+    ...
+    ===========================================================
+    Build application
+    ===========================================================
+    ...
+    arm-none-eabi-gcc ... -c component/soc/realtek/8195a/cmsis/device/system_8195a.c -o component/soc/realtek/8195a/cmsis/device/system_8195a.o
+    ...
+    ```
 
 -----
 ## Other commands
