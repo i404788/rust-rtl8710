@@ -546,7 +546,7 @@ Use the same instructions as _"Run Flash Code From Console"_ above.
 1. TODO: Xargo is no longer needed for compiling `thumbv7m-none-eabi` programs: <br>
     https://users.rust-lang.org/t/psa-you-no-longer-need-xargo-to-do-arm-cortex-m-development/16703
 
-1. The Realtek Ameba RTL8710AF SDK then builds the complete flash image by compiling all the necessary system and library files, including drivers for wifi and all other interfaces:
+1. The Realtek Ameba RTL8710AF SDK then builds the complete flash image by compiling all the necessary system and library files, including drivers and protocols for wifi and all other interfaces:
 
     ```bash
     ...
@@ -555,7 +555,56 @@ Use the same instructions as _"Run Flash Code From Console"_ above.
     ===========================================================
     ...
     arm-none-eabi-gcc ... -c component/soc/realtek/8195a/cmsis/device/system_8195a.c -o component/soc/realtek/8195a/cmsis/device/system_8195a.o
+    arm-none-eabi-gcc ... -c component/common/api/at_cmd/atcmd_ethernet.c -o component/common/api/at_cmd/atcmd_ethernet.o
+    arm-none-eabi-gcc ... -c component/common/api/at_cmd/atcmd_lwip.c -o component/common/api/at_cmd/atcmd_lwip.o
+    arm-none-eabi-gcc ... -c component/common/api/at_cmd/atcmd_sys.c -o component/common/api/at_cmd/atcmd_sys.o
     ...
+    ```
+    
+1. The Realtek Ameba RTL8710AF SDK links the compiled files into a single image `application.axf`
+
+    ```bash
+    arm-none-eabi-gcc  -mcpu=cortex-m3 -mthumb -g --specs=nano.specs -nostartfiles -Wl,-Map=application/Debug/bin/application.map -Os -Wl,--gc-sections -Wl,--cref -Wl,--entry=Reset_Handler -Wl,--no-enum-size-warning -Wl,--no-wchar-size-warning -o application/Debug/bin/application.axf  application/Debug/obj/system_8195a.o application/Debug/obj/atcmd_ethernet.o application/Debug/obj/atcmd_lwip.o application/Debug/obj/atcmd_sys.o application/Debug/obj/atcmd_wifi.o ... application/Debug/rust_obj/librustl8710.o application/Debug/rust_obj/libfreertos_rs.o application/Debug/rust_obj/libcore.o application/Debug/rust_obj/liballoc.o application/Debug/rust_obj/libcompiler_builtins.o application/Debug/obj/ram_1.r.o 
+    ```
+    
+1. The SDK generates the flash image `ram_all.bin` by manipulating `application.axf`:
+
+    ```bash
+    ===========================================================
+    Image manipulating
+    ===========================================================
+    arm-none-eabi-nm application/Debug/bin/application.axf | sort > application/Debug/bin/application.nmap
+    arm-none-eabi-objcopy -j .image2.start.table -j .ram_image2.text -j .ram_image2.rodata -j .ram.data -Obinary application/Debug/bin/application.axf application/Debug/bin/ram_2.bin
+    arm-none-eabi-objcopy -j .sdr_text -j .sdr_rodata -j .sdr_data -Obinary application/Debug/bin/application.axf application/Debug/bin/sdram.bin
+    cp component/soc/realtek/8195a/misc/bsp/image/ram_1.p.bin application/Debug/bin/ram_1.p.bin
+    chmod 777 application/Debug/bin/ram_1.p.bin
+    chmod +rx component/soc/realtek/8195a/misc/iar_utility/common/tools/pick component/soc/realtek/8195a/misc/iar_utility/common/tools/checksum component/soc/realtek/8195a/misc/iar_utility/common/tools/padding
+    component/soc/realtek/8195a/misc/iar_utility/common/tools/pick 0x`grep __ram_image2_text_start__ application/Debug/bin/application.nmap | gawk '{print $1}'` 0x`grep __ram_image2_text_end__ application/Debug/bin/application.nmap | gawk '{print $1}'` application/Debug/bin/ram_2.bin application/Debug/bin/ram_2.p.bin body+reset_offset+sig
+    b:268460032 s:268460032 e:268746656
+    size 286624
+    copy size 286624
+    component/soc/realtek/8195a/misc/iar_utility/common/tools/pick 0x`grep __ram_image2_text_start__ application/Debug/bin/application.nmap | gawk '{print $1}'` 0x`grep __ram_image2_text_end__ application/Debug/bin/application.nmap | gawk '{print $1}'` application/Debug/bin/ram_2.bin application/Debug/bin/ram_2.ns.bin body+reset_offset
+    b:268460032 s:268460032 e:268746656
+    size 286624
+    copy size 286624
+    component/soc/realtek/8195a/misc/iar_utility/common/tools/pick 0x`grep __sdram_data_start__ application/Debug/bin/application.nmap | gawk '{print $1}'` 0x`grep __sdram_data_end__ application/Debug/bin/application.nmap | gawk '{print $1}'` application/Debug/bin/sdram.bin application/Debug/bin/ram_3.p.bin body+reset_offset
+    b:805306368 s:805306368 e:805306368
+    size 0
+    copy size 0
+    component/soc/realtek/8195a/misc/iar_utility/common/tools/padding 44k 0xFF application/Debug/bin/ram_1.p.bin
+    total 44 k, padding data ff, name application/Debug/bin/ram_1.p.bin
+    Original size 15032
+    Padding  size 45056
+    cat application/Debug/bin/ram_1.p.bin > application/Debug/bin/ram_all.bin
+    chmod 777 application/Debug/bin/ram_all.bin
+    cat application/Debug/bin/ram_2.p.bin >> application/Debug/bin/ram_all.bin
+    if [ -s application/Debug/bin/sdram.bin ]; then cat application/Debug/bin/ram_3.p.bin >> application/Debug/bin/ram_all.bin; fi
+    cat application/Debug/bin/ram_2.ns.bin > application/Debug/bin/ota.bin
+    chmod 777 application/Debug/bin/ota.bin
+    if [ -s application/Debug/bin/sdram.bin ]; then cat application/Debug/bin/ram_3.p.bin >> application/Debug/bin/ota.bin; fi
+    component/soc/realtek/8195a/misc/iar_utility/common/tools/checksum application/Debug/bin/ota.bin || true
+    size = 286640 
+    checksum 1bbbe85
     ```
 
 -----
