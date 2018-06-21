@@ -12,7 +12,7 @@ https://medium.com/@ly.lee/running-rust-and-freertos-on-the-padi-iot-stamp-fb36c
 
 - Replaced `gdb-arm-none-eabi` (obsolete) by `gdb-multiarch`
 
-- Upgraded freertos.rs from version 1.0 to 2.0
+- Upgraded `freertos.rs` from version 1.0 to 2.0
 
 - Build, flash and debug PADI from Visual Studio Code
 
@@ -80,7 +80,7 @@ You will need the following development hardware (US$ 14):
 
 1. The following software modules are included:
 
-    - Realtek Ameba RTL8710AF SDK (from the official PADI downloads): Provides the tools to build, flash and debug PADI programs written in C <br>
+    - Realtek Ameba RTL8710AF SDK (from the official PADI downloads): Provides the tools to build, flash and debug PADI programs written in C, excluding the SDK docs <br>
     https://github.com/lupyuen/rustl8710/tree/master/component <br>
     https://github.com/lupyuen/rustl8710/tree/master/src/c
     
@@ -312,7 +312,6 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
 
 1. Connect the PADI to your computer via the PADI Serial Console USB adapter according to Page 2 of <br>
 http://files.pine64.org/doc/PADI/quick-start-guide/padi-iot-stamp-qsg.pdf
-
 
     <table>
         <thead>
@@ -698,7 +697,7 @@ openocd -f interface/jlink.cfg -f rtl8710.ocd \
 -----
 ## References
 
-Official PADI docs and downloads: <br>
+Official PADI docs and downloads, including Realtek Ameba RTL8710AF SDK and its docs: <br>
 https://www.pine64.org/?page_id=946
 
 Original rustl8710 article: <br>
