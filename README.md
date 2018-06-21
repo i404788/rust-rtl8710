@@ -121,7 +121,7 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
 1. Although the document states that an external power supply is needed, from experience
     this is not necessary. The USB port of the computer should provide sufficient power
     to the VDD33 / VCC pins.
-
+    
 ## For Windows: Redirect SWD Debugger port from Windows to VirtualBox
 
 1. If you're using VirtualBox on Windows, you should configure VirtualBox to allow the Ubuntu Virtual Machine to access the USB port used by the PADI SWD Debugger. Here's how...
@@ -182,6 +182,9 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
     Info : SWD DPIDR 0x2ba01477
     Info : rtl8710.cpu: hardware has 6 breakpoints, 4 watchpoints
     ```
+1. If the SWD Debugger is not detected by Ubuntu, install "J-Link Software and Documentation pack for Linux, DEB installer, 64-bit" from
+
+    https://www.segger.com/downloads/jlink#J-LinkSoftwareAndDocumentationPack
 
 ### Write flash image from console (using Realtek SDK)
 
