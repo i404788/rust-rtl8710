@@ -130,29 +130,29 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
 
     <table>
         <thead>
-            <td>
-                PADI IoT Stamp
+            <td colspan="2">
+                <b> PADI IoT Stamp </b>
             </td>
-            <td>
-                PADI SWD Debugger
+            <td colspan="2">
+                <b> PADI SWD Debugger </b>
             </td>
         </thead>
         <tbody>
             <tr>
-                <td> VDD33 [Red] </td>
-                <td> VCC (SWD Pin 1) </td>
+                <td> +3.3V </td><td> [Red] </td>
+                <td> 3V3 </td><td> (SWD Pin 1) </td>
             </tr>
             <tr>
-                <td> GE3 [Green] </td>
-                <td> SWDIO (SWD Pin 7) </td>
+                <td> GE3 </td><td> [Green] </td>
+                <td> SWDIO </td><td> (SWD Pin 7) </td>
             </tr>
             <tr>
-                <td> GE4 [Blue] </td>
-                <td> SWCLK (SWD Pin 9) </td>
+                <td> GE4 </td><td> [Blue] </td>
+                <td> SWCLK </td><td> (SWD Pin 9) </td>
             </tr>
             <tr>
-                <td> GND [Black] </td>
-                <td> GND (SWD Pin 4) </td>
+                <td> GND </td><td> [Black] </td>
+                <td> GND </td><td> (SWD Pin 4) </td>
             </tr>
         </tbody>
     </table>
@@ -342,36 +342,41 @@ http://files.pine64.org/doc/PADI/quick-start-guide/padi-iot-stamp-qsg.pdf
 
     <table>
         <thead>
-            <td>
-                PADI Serial Console
+            <td colspan="2">
+                <b> PADI Serial Console </b>
             </td>
-            <td>
-                PADI IoT Stamp
+            <td colspan="2">
+                <b> PADI IoT Stamp </b>
             </td>
         </thead>
         <tbody>
             <tr>
-                <td> GND [Black] </td>
-                <td> GND </td>
+                <td> GND </td><td> [Black] </td>
+                <td> GND </td><td> </td>
             </tr>
             <tr>
-                <td> 3V3 [Red] </td>
-                <td> VDD </td>
+                <td> 3V3 </td><td> [Red] </td>
+                <td> VDD </td><td> </td>
             </tr>
             <tr>
-                <td> RxD [Brown] </td>
-                <td> GA4 (UART2_OUT) </td>
+                <td> RxD </td><td> [Brown] </td>
+                <td> GA4 </td><td> (UART2_OUT) </td>
             </tr>
             <tr>
-                <td> TxD [White] </td>
-                <td> GA0 (UART2_IN) </td>
+                <td> TxD </td><td> [White] </td>
+                <td> GA0 </td><td> (UART2_IN) </td>
             </tr>
         </tbody>
     </table>
 
-    ![Serial Console](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbserial1.jpg)
-    
-    ![PADI IoT Stamp](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbserial2.jpg)
+    <table>
+        <tbody>
+            <tr>
+                <td><img alt="Serial Console" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbserial1.jpg"></td>
+                <td><img alt="PADI IoT Stamp" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbserial2.jpg"></td>
+            </tr>
+        <tbody>    
+    </table> 
 
 1. Connect PADI Serial Console to the USB port of your computer to power up the PADI IoT Stamp
 
