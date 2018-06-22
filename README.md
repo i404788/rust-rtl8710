@@ -128,7 +128,6 @@ You will need the following development hardware (US$ 14):
 1. Connect the PADI to your computer via the PADI SWD Debugger USB adapter according to <br>
 http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram.pdf
 
-
     <table>
         <thead>
             <td>
@@ -158,10 +157,14 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
         </tbody>
     </table>
 
+    ![PADI IoT Stamp](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbswd2.jpg)
+
+    ![SWD Debugger](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbswd1.jpg)
+
 1. Although the document states that an external power supply is needed, from experience
     this is not necessary. The USB port of the computer should provide sufficient power
     to the VDD33 / VCC pins.
-    
+
 ## For Windows: Redirect SWD Debugger port from Windows to VirtualBox
 
 1. If you're using VirtualBox on Windows, you should configure VirtualBox to allow the Ubuntu Virtual Machine to access the USB port used by the PADI SWD Debugger. Here's how...
@@ -360,6 +363,10 @@ http://files.pine64.org/doc/PADI/quick-start-guide/padi-iot-stamp-qsg.pdf
             </tr>
         </tbody>
     </table>
+
+    ![Serial Console](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbserial1.jpg)
+    
+    ![PADI IoT Stamp](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbserial2.jpg)
 
 1. Connect PADI Serial Console to the USB port of your computer to power up the PADI IoT Stamp
 
