@@ -168,7 +168,7 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
     
 1. Although the document states that an external power supply is needed, from experience
     this is not necessary. The USB port of the computer should provide sufficient power
-    to the VDD33 / VCC pins.
+    to the `3V3` and `+3.3V` pins.
 
 ## For Windows: Redirect SWD Debugger port from Windows to VirtualBox
 
