@@ -157,10 +157,15 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
         </tbody>
     </table>
 
-    ![PADI IoT Stamp](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbswd2.jpg)
-
-    ![SWD Debugger](https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbswd1.jpg)
-
+    <table>
+        <tbody>
+            <tr>
+                <td><img alt="PADI IoT Stamp" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbswd2.jpg"></td>
+                <td><img alt="SWD Debugger" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbswd1.jpg"></td>
+            </tr>
+        <tbody>    
+    </table> 
+    
 1. Although the document states that an external power supply is needed, from experience
     this is not necessary. The USB port of the computer should provide sufficient power
     to the VDD33 / VCC pins.
