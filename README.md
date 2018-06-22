@@ -160,7 +160,7 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
     <table>
         <tbody>
             <tr>
-                <td><img alt="PADI IoT Stamp" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbswd2.jpg"></td>
+                <td width="40%"><img alt="PADI IoT Stamp" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbswd2.jpg"></td>
                 <td><img alt="SWD Debugger" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbswd1.jpg"></td>
             </tr>
         <tbody>    
@@ -372,7 +372,7 @@ http://files.pine64.org/doc/PADI/quick-start-guide/padi-iot-stamp-qsg.pdf
     <table>
         <tbody>
             <tr>
-                <td><img style="max-width: 70%" alt="Serial Console" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbserial1.jpg"></td>
+                <td width="60%"><img alt="Serial Console" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbserial1.jpg"></td>
                 <td><img alt="PADI IoT Stamp" src="https://raw.githubusercontent.com/lupyuen/rustl8710/master/images/usbserial2.jpg"></td>
             </tr>
         <tbody>    
