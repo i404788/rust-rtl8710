@@ -117,6 +117,7 @@ You will need the following development hardware (US$ 14):
 1.  Run the following command on Ubuntu:
 
     ```bash
+    make clean
     make setup GDB_SERVER=openocd
     ```
 
