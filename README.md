@@ -123,6 +123,8 @@ You will need the following development hardware (US$ 14):
 
 1. This tells the Realtek Ameba RTL8710AF SDK to use OpenOCD (instead of JLink) to connect to the PADI SWD Debugger during flash and debug operations
 
+1. This also erases any previous build of the PADI image, e.g. from the downloaded VirtualBox virtual machine
+
 -----
 ## Connect PADI and SWD Debugger to computer
 
