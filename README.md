@@ -99,7 +99,7 @@ You will need the following development hardware (US$ 14):
 
 ## Install Rust components
 
-1. On Ubuntu, install `rustup` from https://rustup.rs/:
+1. On Ubuntu, install `rustup` from https://rustup.rs/ (select default installation):
 
     ```bash
     curl https://sh.rustup.rs -sSf | sh
@@ -108,6 +108,7 @@ You will need the following development hardware (US$ 14):
 1. Run the following commands on Ubuntu:
 
     ```bash
+    source $HOME/.cargo/env
     cd rustl8710
     rustup update
     rustup override set nightly
