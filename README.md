@@ -22,6 +22,8 @@ Tested on:
 
 - Ubuntu 18.04 LTS x86 64-bit on Intel Atom x5-Z8300 notebook PC
 
+For Raspberry Pi, see https://github.com/lupyuen/rustl8710/blob/master/pi/README.md
+
 -----
 ## Hardware components
 
@@ -97,7 +99,11 @@ You will need the following development hardware (US$ 14):
 
 ## Install Rust components
 
-1. On Ubuntu, install `rustup` from https://rustup.rs/
+1. On Ubuntu, install `rustup` from https://rustup.rs/:
+
+    ```bash
+    curl https://sh.rustup.rs -sSf | sh
+    ```
 
 1. Run the following commands on Ubuntu:
 
