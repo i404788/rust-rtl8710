@@ -250,6 +250,8 @@ http://files.pine64.org/doc/PADI/documentation/padi-jtag-swd-connections-diagram
 1. If the SWD Debugger is not detected by Ubuntu, install "J-Link Software and Documentation pack for Linux, DEB installer, 64-bit" from <br>
     https://www.segger.com/downloads/jlink#J-LinkSoftwareAndDocumentationPack
 
+    Or copy `99-jlink.rules` to `/etc/udev/rules.d/`
+
 ### Write flash image from console (using Realtek SDK)
 
 1. At the Ubuntu console, run:
